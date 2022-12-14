@@ -5,6 +5,8 @@ namespace BootCart.Model
     public class Product
     {
         public int Id { get; set; }
+
+        [StringLength(50)]
         public string ProductName { get; set; }
         public int Quantity { get; set; }
         public float Price { get; set; }
@@ -16,7 +18,7 @@ namespace BootCart.Model
         [ForeignKey(nameof(Master))]
         public int SellerId { get; set; }
 
-
+        public IEnumerable<Order> ProductOrder { get; set; }
 
 
     }

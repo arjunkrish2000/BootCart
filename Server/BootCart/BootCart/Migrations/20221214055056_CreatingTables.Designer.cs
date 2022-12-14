@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootCart.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221214044403_Table-Creation")]
-    partial class TableCreation
+    [Migration("20221214055056_CreatingTables")]
+    partial class CreatingTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,6 +78,43 @@ namespace BootCart.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("BootCart.Model.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("OrderDeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderPlacedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("BootCart.Model.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -98,7 +135,8 @@ namespace BootCart.Migrations
 
                     b.Property<string>("ProductName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -420,6 +458,25 @@ namespace BootCart.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BootCart.Model.Order", b =>
+                {
+                    b.HasOne("BootCart.Model.Product", "Product")
+                        .WithMany("ProductOrder")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BootCart.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BootCart.Model.Product", b =>
                 {
                     b.HasOne("BootCart.Model.ProductMaster", "Master")
@@ -502,6 +559,11 @@ namespace BootCart.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BootCart.Model.Product", b =>
+                {
+                    b.Navigation("ProductOrder");
                 });
 #pragma warning restore 612, 618
         }

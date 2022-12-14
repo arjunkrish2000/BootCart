@@ -7,10 +7,9 @@ namespace BootCart.Model
     public class ApplicationUser:IdentityUser
     {
         [StringLength(15)]
-
         public String FirstName { get; set; }
-        [StringLength(15)]
 
+        [StringLength(15)]
         public String LastName { get; set; }
         public String Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
