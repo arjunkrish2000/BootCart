@@ -19,15 +19,15 @@ import { HttpClientModule } from "@angular/common/http"
     FormsModule,
     AuthModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      {
-        path: '', loadChildren: () => import('./public/public-routing.module').then(m => m.PublicRoutingModule)
-      },
-      {
-        path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)
-      },
+    // RouterModule.forRoot([
+    //   {
+    //     path: '', loadChildren: () => import('./public/public-routing.module').then(m => m.PublicRoutingModule)
+    //   },
+    //   {
+    //     path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)
+    //   },
      
-    ]),
+    // ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
