@@ -13,5 +13,7 @@ namespace BootCart.Model
         public String LastName { get; set; }
         public String Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
+
+        public IEnumerable<CustomerDetail> CustomerDetails{ get; set; }
     }
 }
