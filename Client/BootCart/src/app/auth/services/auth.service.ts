@@ -12,4 +12,7 @@ export class AuthService {
   login(data: any){
     return this.http.post(`${StaticDetails.API_URL}/accounts/login`, data);
   }
+  register(data:any){
+    this.http.post(`${StaticDetails.API_URL}/accounts/register`,data);
+  }
 }
