@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
+import { HttpClientModule } from "@angular/common/http"
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PublicModule } from './public/public.module';
     PublicModule,
     FormsModule,
     AuthModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {
         path: '', loadChildren: () => import('./public/public-routing.module').then(m => m.PublicRoutingModule)
