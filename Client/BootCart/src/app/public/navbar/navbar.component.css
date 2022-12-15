@@ -13,10 +13,29 @@ header{
 .logo{
     font-family: sans-serif;
     font-weight: bold;
+    margin-left:50px;
+   
 }
 
 a{
-    color: #56d6d6;
+   
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 50px;
 }
+.btn{
+   background-color:aqua ;
+}
+.bi3{
+ 
+    margin-right: 50px;
+    margin-left: 35px;
+
+    color: #ffffff;
+
+}
+.bi{
+    margin-left: 35px;
+    color: #ffffff;
+
+}
+
