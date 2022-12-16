@@ -9,13 +9,12 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  authService: any;
   constructor(private registerService:AuthService, private router:Router) { }
 
   handleRegister(form:any){
     console.log(form.value);
-    this.authService.register(form.value).subscribe({
-        next:(responce:any)=>{
+    this.registerService.register(form.value).subscribe({
+        next:(responce)=>{
           console.log(responce);
         }
     })
