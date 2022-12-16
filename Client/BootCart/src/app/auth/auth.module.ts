@@ -6,10 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { PublicModule } from './../public/public.module';
 import { RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './auth-layout.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
+    RegisterComponent,
     AuthLayoutComponent
   ],
   imports: [
