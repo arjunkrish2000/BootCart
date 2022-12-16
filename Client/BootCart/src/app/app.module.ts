@@ -6,11 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
-import { HttpClientModule } from "@angular/common/http"
+import { HttpClientModule } from "@angular/common/http";
+import { HomeComponent } from './admin/home/home.component';
+import { AdminLayoutComponent } from './admin/admin-layout.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
