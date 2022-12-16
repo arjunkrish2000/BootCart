@@ -1,10 +1,6 @@
 ﻿namespace BootCart.Model.RequestModels
 {
-    public enum UserType
-    {
-        Customer,
-        Seller
-    }
+   
     public class RegisterRequestModel
     {
         [Required]
@@ -18,9 +14,8 @@
         public String LastName { get; set; }
      
 
-        public String Gender { get; set; }
-        public UserType UserTypes { get; set; }
-
+        public string Gender { get; set; }
+       
         public DateTime DateOfBirth { get; set; }
 
         [EmailAddress]
@@ -29,7 +24,16 @@
 
         public String PhoneNumber { get; set; }
 
-        }
+        [Required]
+        [StringLength(20)]
+        public string Password { get; set; }
+
+        //[Required]
+        //[StringLength(20)]
+        //[Compare(nameof(Password))]
+        //public string ConfirmPassword { get; set; }
+
+    }
 
     
 }

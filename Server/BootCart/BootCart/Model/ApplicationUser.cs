@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace BootCart.Model
 {
+  
     public class ApplicationUser:IdentityUser
     {
         [StringLength(15)]
@@ -14,6 +15,6 @@ namespace BootCart.Model
         public String Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        public IEnumerable<CustomerDetail> CustomerDetails{ get; set; }
+        //public IEnumerable<CustomerDetail> CustomerDetails{ get; set; }
     }
 }
