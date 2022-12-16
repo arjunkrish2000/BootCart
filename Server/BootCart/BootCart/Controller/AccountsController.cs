@@ -139,5 +139,62 @@ namespace BootCart.Controller
             }
             return Ok("Data generated");
         }
+        [HttpPost("RegisterProductMaster")]
+        public async Task<IActionResult> RegisterProductMaster(ProductMasterRegisterModel model)
+        {
+            var user = new ApplicationUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                PhoneNumber = model.PhoneNumber,
+                Gender = model.Gender,
+                DateOfBirth = model.DateOfBirth,
+                UserName = Guid.NewGuid().ToString().Replace("-", "")
+            };
+            var role = "ProductMaster";
+            var res = await userManager.CreateAsync(user);
+            if (!res.Succeeded)
+                return BadRequest(res);
+
+
+
+            db.ProductMasters.Add(new ProductMaster()
+            {
+                UserId = user.Id,
+                BrandName = model.BrandName,
+                ProductName = model.ProductName,
+                ProductCategory = model.ProductCategory,
+                YOP=model.YOP,
+                LicenseNumber = model.LicenseNumber,
+                Status = "Verified"
+            });
+
+
+
+            await userManager.AddToRoleAsync(user, role);
+            return Ok(user);
+            return Ok(model);
+        }
+        //[HttpPut("UpdateCustomer")]
+        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+
+
+
+
+
+        //public async Task<IActionResult> put(RegisterRequestModel model)
+        //{
+        //    var Customer = await db.ApplicationUsers.FindAsync(model.CustomerId);
+        //    if (Customer == null)
+        //        return NotFound();
+        //    Customer.FirstName = model.FirstName;
+        //    Customer.LastName = model.LastName;
+        //    Customer.Email = model.Email;
+        //    Customer.PhoneNumber = model.PhoneNumber;
+        //    await db.SaveChangesAsync();
+        //    return Ok(Customer);
+        //}
     }
 }

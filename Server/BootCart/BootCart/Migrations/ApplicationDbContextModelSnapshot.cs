@@ -76,29 +76,6 @@ namespace BootCart.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("BootCart.Model.CustomerDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AlternateEmail")
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CustomerDetails");
-                });
-
             modelBuilder.Entity("BootCart.Model.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -518,17 +495,6 @@ namespace BootCart.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BootCart.Model.CustomerDetail", b =>
-                {
-                    b.HasOne("BootCart.Model.ApplicationUser", "User")
-                        .WithMany("CustomerDetails")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BootCart.Model.Order", b =>
                 {
                     b.HasOne("BootCart.Model.Product", "Product")
@@ -657,11 +623,6 @@ namespace BootCart.Migrations
             modelBuilder.Entity("BootCart.Model.Product", b =>
                 {
                     b.Navigation("ProductOrder");
-                });
-
-            modelBuilder.Entity("BootCart.Model.ApplicationUser", b =>
-                {
-                    b.Navigation("CustomerDetails");
                 });
 #pragma warning restore 612, 618
         }
