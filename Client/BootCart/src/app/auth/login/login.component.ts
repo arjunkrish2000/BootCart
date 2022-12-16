@@ -17,7 +17,7 @@ export class LoginComponent {
 			next: (res:any) => {
 				if(res.success){
 					localStorage.setItem('token', res.data);
-					this.router.navigate(["user"]);
+					this.router.navigate(["admin"]);
 				}
 			},
 			error: (err:any) => {
