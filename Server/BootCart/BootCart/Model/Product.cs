@@ -6,20 +6,22 @@ namespace BootCart.Model
     {
         public int Id { get; set; }
 
-        [StringLength(50)]
-        public string ProductName { get; set; }
+        public string ProductType { get; set; }
+
+        [StringLength(50)]        
+        public string ProductCategory { get; set; }
         public int Quantity { get; set; }
         public float Price { get; set; }
-        public string Type { get; set; }
         public string ProductImage { get; set; }
 
-        public int ParentId { get; set; }
+        public DateTime AddedDate { get; set; }
         public ProductMaster Master { get; set; }
         [ForeignKey(nameof(Master))]
-        public int SellerId { get; set; }
+        public int ProductMasterId { get; set; }
 
         public IEnumerable<Order> ProductOrder { get; set; }
 
+        public IEnumerable<Cart> Addtocart { get; set; }
 
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BootCart.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class TableCreated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,6 +80,7 @@ namespace BootCart.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HouseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostOffice = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pincode = table.Column<int>(type: "int", nullable: false),
@@ -195,8 +196,6 @@ namespace BootCart.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     YOP = table.Column<int>(type: "int", nullable: false),
                     LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
@@ -218,23 +217,49 @@ namespace BootCart.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ProductType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductCategory = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: false),
-                    SellerId = table.Column<int>(type: "int", nullable: false)
+                    AddedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductMasterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_ProductMasters_SellerId",
-                        column: x => x.SellerId,
+                        name: "FK_Products_ProductMasters_ProductMasterId",
+                        column: x => x.ProductMasterId,
                         principalTable: "ProductMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cartss",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cartss", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cartss_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cartss_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -243,19 +268,20 @@ namespace BootCart.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderPlacedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderDeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Amount = table.Column<float>(type: "real", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
+                    CustomerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TotalAmount = table.Column<double>(type: "float", nullable: false),
+                    OrderdDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeliveryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Orderid = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Orders_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -272,7 +298,9 @@ namespace BootCart.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Attribute = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Material = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -290,8 +318,9 @@ namespace BootCart.Migrations
                 name: "OrderItems",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -370,19 +399,29 @@ namespace BootCart.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cartss_ProductId",
+                table: "Cartss",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cartss_UserId",
+                table: "Cartss",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
                 table: "OrderItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Orders_CustomerId",
+                table: "Orders",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ProductId",
                 table: "Orders",
                 column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId",
-                table: "Orders",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_OrderId",
@@ -395,9 +434,9 @@ namespace BootCart.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_SellerId",
+                name: "IX_Products_ProductMasterId",
                 table: "Products",
-                column: "SellerId");
+                column: "ProductMasterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductSpecifications_ProductId",
@@ -424,6 +463,9 @@ namespace BootCart.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Cartss");
 
             migrationBuilder.DropTable(
                 name: "OrderItems");

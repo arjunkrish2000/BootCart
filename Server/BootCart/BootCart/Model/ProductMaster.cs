@@ -11,8 +11,7 @@ namespace BootCart.Model
         public string UserId { get; set; }
 
         public String BrandName { get; set; }
-        public String ProductName { get; set; }
-        public String ProductCategory { get; set; }
+      
 
         public int YOP { get; set; }
 

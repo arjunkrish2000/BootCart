@@ -8,6 +8,8 @@ namespace BootCart.Model
     public class Address
     {
         public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
         public String HouseName { get; set; }
 
         public String PostOffice { get; set; }

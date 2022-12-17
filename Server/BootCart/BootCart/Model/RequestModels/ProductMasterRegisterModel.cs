@@ -29,16 +29,8 @@
         [Required]
         [StringLength(15)]
         [Display(Name = "Brand Name")]
-        public String BrandName { get; set; }
-        [Required]
-        [StringLength(15)]
-        [Display(Name = "Product Name")]
-        public String ProductName { get; set; }
-        [Required]
-        [StringLength(15)]
-        [Display(Name = "Product Category")]
-        public String ProductCategory { get; set; }
 
+        public String BrandName { get; set; }
         [Required]
         [Display(Name = "Years Of Experience")]
         public int YOP { get; set; }

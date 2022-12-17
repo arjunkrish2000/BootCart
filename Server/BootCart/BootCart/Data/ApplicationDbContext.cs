@@ -13,10 +13,11 @@ namespace BootCart.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Order>()
-                .HasOne(m => m.Product)
-                .WithMany(m => m.ProductOrder)
-                .OnDelete(DeleteBehavior.NoAction);
+               
+            builder.Entity<Cart>()
+               .HasOne(m => m.Product)
+               .WithMany(m => m.Addtocart)
+               .OnDelete(DeleteBehavior.NoAction);
 
         }
 
@@ -28,7 +29,7 @@ namespace BootCart.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        //public DbSet<CustomerDetail> CustomerDetails { get; set; }
+        public DbSet<Cart> Cartss { get; set; }
 
     }
 }

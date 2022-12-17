@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootCart.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221216111834_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20221217103321_TableCreated")]
+    partial class TableCreated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,6 +52,10 @@ namespace BootCart.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Pincode")
                         .HasColumnType("int");
 
@@ -78,7 +82,7 @@ namespace BootCart.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("BootCart.Model.Order", b =>
+            modelBuilder.Entity("BootCart.Model.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,18 +90,8 @@ namespace BootCart.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Address")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<float>("Amount")
+                    b.Property<float>("Price")
                         .HasColumnType("real");
-
-                    b.Property<DateTime>("OrderDeliveryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("OrderPlacedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -112,10 +106,10 @@ namespace BootCart.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Cartss");
                 });
 
-            modelBuilder.Entity("BootCart.Model.OrderItem", b =>
+            modelBuilder.Entity("BootCart.Model.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +117,51 @@ namespace BootCart.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("OrderdDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Orderid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BootCart.Model.OrderItem", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
                     b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -162,34 +200,34 @@ namespace BootCart.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("AddedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
+
+                    b.Property<string>("ProductCategory")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ProductImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductName")
+                    b.Property<int>("ProductMasterId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProductType")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("ProductMasterId");
 
                     b.ToTable("Products");
                 });
@@ -207,14 +245,6 @@ namespace BootCart.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LicenseNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductCategory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -244,12 +274,20 @@ namespace BootCart.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Attribute")
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Material")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -497,10 +535,10 @@ namespace BootCart.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BootCart.Model.Order", b =>
+            modelBuilder.Entity("BootCart.Model.Cart", b =>
                 {
                     b.HasOne("BootCart.Model.Product", "Product")
-                        .WithMany("ProductOrder")
+                        .WithMany("Addtocart")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -516,15 +554,30 @@ namespace BootCart.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BootCart.Model.Order", b =>
+                {
+                    b.HasOne("BootCart.Model.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BootCart.Model.Product", null)
+                        .WithMany("ProductOrder")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("BootCart.Model.OrderItem", b =>
                 {
-                    b.HasOne("BootCart.Model.Order", "OrderItems")
-                        .WithMany()
+                    b.HasOne("BootCart.Model.Order", "Order")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("OrderItems");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BootCart.Model.Payment", b =>
@@ -542,7 +595,7 @@ namespace BootCart.Migrations
                 {
                     b.HasOne("BootCart.Model.ProductMaster", "Master")
                         .WithMany()
-                        .HasForeignKey("SellerId")
+                        .HasForeignKey("ProductMasterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -622,8 +675,15 @@ namespace BootCart.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("BootCart.Model.Order", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("BootCart.Model.Product", b =>
                 {
+                    b.Navigation("Addtocart");
+
                     b.Navigation("ProductOrder");
                 });
 #pragma warning restore 612, 618

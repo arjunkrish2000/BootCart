@@ -54,7 +54,7 @@ namespace BootCart.Controller
                 });
             }
 
-            var token = GenerateToken(user);
+            var token = await GenerateToken(user);
 
             return Ok(new ResponseModel<string>
             {
@@ -92,7 +92,7 @@ namespace BootCart.Controller
            // return Ok(model);
         }
 
-        private string GenerateToken(ApplicationUser user)
+        private async Task<string> GenerateToken(ApplicationUser user)
         {
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
@@ -100,12 +100,14 @@ namespace BootCart.Controller
             var audience = configuration["Jwt:Audience"];
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var userRoles = await userManager.GetRolesAsync(user);
+            var role = userRoles.FirstOrDefault();
             var claims = new Claim[]
             {
                 new(ClaimTypes.NameIdentifier, user.UserName),
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
-                new(ClaimTypes.Role, "User")
+                new("Role", role)
             };
 
             var token = new JwtSecurityToken(
@@ -163,8 +165,6 @@ namespace BootCart.Controller
             {
                 UserId = user.Id,
                 BrandName = model.BrandName,
-                ProductName = model.ProductName,
-                ProductCategory = model.ProductCategory,
                 YOP=model.YOP,
                 LicenseNumber = model.LicenseNumber,
                 Status = "Verified"
