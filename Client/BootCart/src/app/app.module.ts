@@ -7,14 +7,13 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
 import { HttpClientModule } from "@angular/common/http";
-import { HomeComponent } from './admin/home/home.component';
-import { AdminLayoutComponent } from './admin/admin-layout.component'
+import { CustomerModule } from './customer/customer.module';
+import { AdminModule } from './admin/admin.module';
+import { ProductmasterModule } from './productmaster/productmaster.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -23,15 +22,9 @@ import { AdminLayoutComponent } from './admin/admin-layout.component'
     FormsModule,
     AuthModule,
     HttpClientModule,
-    // RouterModule.forRoot([
-    //   {
-    //     path: '', loadChildren: () => import('./public/public-routing.module').then(m => m.PublicRoutingModule)
-    //   },
-    //   {
-    //     path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)
-    //   },
-     
-    // ]),
+    CustomerModule,
+    AdminModule,
+    ProductmasterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
