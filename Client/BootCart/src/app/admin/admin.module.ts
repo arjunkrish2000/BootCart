@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './admin-layout.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { RouterModule } from '@angular/router';
 import { ViewCustomersComponent } from './view-customers/view-customers.component';
+import { ViewProductMastersComponent } from './view-product-masters/view-product-masters.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ViewCustomersComponent } from './view-customers/view-customers.componen
     HomeComponent,
     NavbarComponent,
     AdminLayoutComponent,
-    ViewCustomersComponent
+    ViewCustomersComponent,
+    ViewProductMastersComponent
   ],
   imports: [
     CommonModule,

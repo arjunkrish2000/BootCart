@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: '', component: AdminLayoutComponent, children:[
     {path: 'home', component: HomeComponent},
     {path: 'view-customers', component: ViewCustomersComponent},
+    {path: 'view-product-masters', component: ViewCustomersComponent},
   ]}
 ];
 
