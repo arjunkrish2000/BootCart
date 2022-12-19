@@ -8,8 +8,6 @@ import { ProductmasterNavbarComponent } from './productmaster-navbar/productmast
 import { RouterModule } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service/public-api';
-
 
 @NgModule({
   declarations: [

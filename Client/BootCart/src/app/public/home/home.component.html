@@ -1,43 +1,61 @@
+<div class="grid-view" *ngIf="view==='grid'">
+  <div class="card text-center">  
+    <div class="card-header fw-bold fs-5 text-success">
+            Header
+    </div>
+  
+    <div class="ovewflow-hidden d-flex justify-content-center align-item-center">   
+        <img src="assets/images/can.jpg" alt="" class="card-img-top">
+    </div>
+  
+    <div class="card-body">
+        <h5 class="card-title title">Title</h5>
+        <h6 class="card-subtitle my-2 text-primary">12 products are available</h6>
+        <p class="card-text description">Description</p>
+    </div>
+  
+    <div class="card-body">
+        <h5 class="card-title text-success">Final Price
+        <span class="text-primary">-20%</span>
+    </h5>
+    <h6 class="card-subtitle text-danger text-decoration-line-through">Orginal Price</h6>
+    </div>
+  
+    <div class="card-footer d-grid gap-2">
+        <button class="btn btn-outline-success" type="button">Add to cart</button>
+    </div>
+  </div>
+</div>
 
-<div class="home">
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
+<div class="list-view"  *ngIf="view === 'list'">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-4 overflow-hidden d-flex justify-content-center align-item-center">
+        <img src="assets/images/can.jpg" alt="" class="img-fluid rounded-start" alt="product Images">
+      </div>
+      <div class="col"> 
 
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
+        <div class="card-header text-center">Header</div>
 
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
+        <div class="card-body">
+          <h5 class="card-title title">Title</h5>
+        <h6 class="card-subtitle my-2 text-primary">12 products are available</h6>
+        <p class="card-text description">Description</p>
+        </div>
 
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
-  <h1 >bimin</h1>
+        <div class="card-body">
+          <h4 class="card-title text-muted" ></h4>
+          <h3 class="card-title text-success">Final Price
+            <span class="text-primary">-20%</span>
+        </h3>
+        <h6 class="card-subtitle text-danger text-decoration-line-through">Orginal Price</h6>
+        </div>
 
-
-
-
+        <div class="card-footer d-grid gap-2">
+          <button class="btn btn-outline-success" type="button">Add to cart</button>
+      </div>
+      
+      </div>
+    </div>
+  </div>
 </div>
