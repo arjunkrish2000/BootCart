@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import StaticDetails from 'src/Data/StaticDetails';
+import { StaticDetails } from '../helpers/staticDetails';
+
 
 
 

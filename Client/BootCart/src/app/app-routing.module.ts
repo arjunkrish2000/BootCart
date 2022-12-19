@@ -15,6 +15,9 @@ const routes: Routes = [
     {
       path: 'customer', loadChildren: () => import('./customer/customer-routing.module').then(m => m.CustomerRoutingModule)
     },
+    {
+      path: 'productmaster', loadChildren: () => import('./productmaster/productmaster-routing.module').then(m => m.ProductmasterRoutingModule)
+    },
   
 ];
 
