@@ -7,12 +7,14 @@ import { PublicModule } from './../public/public.module';
 import { RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './auth-layout.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductMasterRegistrationComponent } from './product-master-registration/product-master-registration.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    ProductMasterRegistrationComponent
   ],
   imports: [
     CommonModule,
