@@ -7,6 +7,10 @@ import { CustomerLayoutComponent } from './customer-layout.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { RouterModule } from '@angular/router';
 import { CustomerNavbarComponent } from './customer-navbar/customer-navbar.component';
+import { ViewBagComponent } from './view-bag/view-bag.component';
+import { ViewProductsComponent } from './view-products/view-products.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 
 
 @NgModule({
@@ -15,6 +19,10 @@ import { CustomerNavbarComponent } from './customer-navbar/customer-navbar.compo
     CustomerLayoutComponent,
     WishlistComponent,
     CustomerNavbarComponent,
+    ViewBagComponent,
+    ViewProductsComponent,
+    OrderHistoryComponent,
+    InvoiceComponent,
   ],
   imports: [
     CommonModule,

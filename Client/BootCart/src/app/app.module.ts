@@ -10,6 +10,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { CustomerModule } from './customer/customer.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductmasterModule } from './productmaster/productmaster.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { ProductmasterModule } from './productmaster/productmaster.module';
     AdminModule,
     ProductmasterModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
