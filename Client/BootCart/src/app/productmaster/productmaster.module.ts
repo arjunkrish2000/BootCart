@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service/public-api';
+import { AddProductSpecificationComponent } from './add-product-specification/add-product-specification.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CookieService } from 'ngx-cookie-service/public-api';
     ProductmasterLayoutComponent,
     ProductmasterNavbarComponent,
     AddProductComponent,
+    AddProductSpecificationComponent,
   ],
   imports: [
     CommonModule,

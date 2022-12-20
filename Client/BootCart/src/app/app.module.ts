@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { PublicModule } from './public/public.module';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { CustomerModule } from './customer/customer.module';
 import { AdminModule } from './admin/admin.module';
 import { ProductmasterModule } from './productmaster/productmaster.module';
 import { CookieService } from 'ngx-cookie-service';
+import { ErrorInterceptor } from './helpers/interceptors/errorInterceptor';
+import { JwtInterceptor } from './helpers/interceptors/jwtInterceptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,14 @@ import { CookieService } from 'ngx-cookie-service';
     AdminModule,
     ProductmasterModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true 
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true
+    }
+  ]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

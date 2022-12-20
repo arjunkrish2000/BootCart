@@ -20,10 +20,10 @@ export class LoginComponent {
 				if(res.success){
 					localStorage.setItem('token', res.data);
 					var decodedToken:any = jwt_decode(res.data);
+					console.log(decodedToken.UserId);
 					console.log(decodedToken);
-					console.log(decodedToken.Role);
-					this.cookieService.set('Email', decodedToken.Email);
-					console.log(this.cookieService.get('Email'));
+					this.cookieService.set('userid', decodedToken.UserId);
+					console.log(this.cookieService.get('userid'));
 					switch(decodedToken.Role){
 						case "Admin":
 							this.router.navigate(["/admin"]);

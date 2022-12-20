@@ -12,20 +12,20 @@ import { ProductMasterService } from '../product-master.service';
 })
 export class AddProductComponent {
   productMaster:any
+  stock:any
   constructor(private pmService:ProductMasterService, private router:Router,private cookieService:CookieService) { }
 
- ngOnInIt(){
-  const email: string = this.cookieService.get('Email');
-  console.log(email);
-  this.pmService.GetUser(email).subscribe({
-      next:(response)=>{
-        this.productMaster = response;
-      }
-  })
- }
+	ngOnInit() {
+    this.pmService.ViewStock()
+      .subscribe(response => {
+        this.stock = response;
+        console.log(response);
+      });
+  }
 
   addProduct(form:any){
     console.log(form.value);
+    
     this.pmService.AddProduct(form.value).subscribe({
         next:(responce)=>{
           console.log(responce);
