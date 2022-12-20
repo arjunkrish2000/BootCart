@@ -14,10 +14,10 @@ namespace BootCart.Model
         public float Price { get; set; }
         public string ProductImage { get; set; }
 
-        public DateTime AddedDate { get; set; }
-        public ProductMaster Master { get; set; }
-        [ForeignKey(nameof(Master))]
-        public int ProductMasterId { get; set; }
+        public DateTime AddedDate { get; set; } 
+        public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey(nameof(ApplicationUser))]
+        public string ApplicationUserId { get; set; }
 
         public IEnumerable<Order> ProductOrder { get; set; }
 

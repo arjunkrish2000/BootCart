@@ -1,6 +1,7 @@
 ﻿using BootCart.Model.RequestModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BootCart.Controller
 {
@@ -29,26 +30,53 @@ namespace BootCart.Controller
         }
 
         [HttpPost("AddProduct")]
-        [ProducesResponseType(typeof(Address), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
 
         public async Task<IActionResult> Post(ProductViewModel model)
         {
-            var user = await userManager.GetUserAsync(User);
-
-            if (user == null)
-            {
-                return BadRequest();
-            }
+            var id = HttpContext.User.FindFirstValue("UserId");
+            
             db.Products.Add(new Product()
             {
-                ProductType=model.ProductType,
-                ProductCategory=model.ProductCategory,
-                AddedDate=model.PurchaseDate,
-                ProductImage=model.ProductImage
+                ProductType = model.ProductType,
+                ProductCategory = model.ProductCategory,
+                Quantity = model.Quantity,
+                ProductImage = model.ProductImage,
+                AddedDate = DateTime.Now,
+                Price = model.Price,
+                ApplicationUserId = id
             });
+            db.SaveChanges();
             return Ok(model);
         }
-       
+
+        [HttpPost("AddProductSpecification")]
+        [ProducesResponseType(typeof(ProductSpecification), StatusCodes.Status200OK)]
+
+        public async Task<IActionResult> AddProductSpecification(ProductViewModel model,int pid)
+        {
+            var id = HttpContext.User.FindFirstValue("UserId");
+
+            db.ProductSpecifications.Add(new ProductSpecification()
+            {
+               Color = model.Color,
+               Material = model.Material,
+               Size = model.Size,
+               ItemQty = model.ItemQty,
+               ProductId = pid
+            });
+            db.SaveChanges();
+            return Ok(model);
+        }
+
+        [HttpGet("ViewStock")]
+
+        public async Task<IActionResult> Viewstock()
+        {
+            var id = HttpContext.User.FindFirstValue("UserId");
+            var stock = db.Products.Where(i => i.ApplicationUserId == id);
+            return Ok(stock);
+        }
 
     }
 }

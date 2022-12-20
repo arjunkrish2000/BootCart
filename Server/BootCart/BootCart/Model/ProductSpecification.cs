@@ -10,6 +10,7 @@ namespace BootCart.Model
         public string Size { get; set; }
         public string Material { get; set; }
 
+        public int ItemQty { get; set; }
         public Product product { get; set; }
         [ForeignKey(nameof(product))]
         public int ProductId { get; set; }

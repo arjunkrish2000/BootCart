@@ -10,17 +10,15 @@ namespace BootCart.Model
         [ForeignKey(nameof(User))]
         public string CustomerId { get; set; }
 
-        public double TotalAmount { get; set; }
-
-        public DateTime OrderdDate { get; set; }
+        public DateTime OrderedDate { get; set; } = DateTime.Now;
 
         public DateTime DeliveryDate { get; set; }
 
-        public String Status { get; set; }
+        public Address Address { get; set; }
+        [ForeignKey(nameof(Address))]
+        public int AddressId { get; set; }
 
+        public double TotalAmount { get; set; }
 
-        public string Orderid { get; set; }
-
-        public IEnumerable<OrderItem> OrderItems { get; set; }
     }
 }

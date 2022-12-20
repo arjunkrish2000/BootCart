@@ -105,7 +105,8 @@ namespace BootCart.Controller
             var claims = new Claim[]
             {
                 new(ClaimTypes.NameIdentifier, user.UserName),
-                new(ClaimTypes.Email, user.Email),
+                new("Email", user.Email),
+                new("UserId", user.Id),
                 new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                 new("Role", role)
             };
@@ -155,7 +156,7 @@ namespace BootCart.Controller
                 UserName = Guid.NewGuid().ToString().Replace("-", "")
             };
             var role = "ProductMaster";
-            var res = await userManager.CreateAsync(user);
+            var res = await userManager.CreateAsync(user, model.Password);
             if (!res.Succeeded)
                 return BadRequest(res);
 
