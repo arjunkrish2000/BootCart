@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  id?:number;
+  Select(n:number){
+    this.id=n;
+  }
 }
