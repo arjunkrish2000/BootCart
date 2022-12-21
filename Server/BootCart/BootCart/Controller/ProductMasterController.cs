@@ -11,13 +11,10 @@ namespace BootCart.Controller
     public class ProductMasterController : ControllerBase
     {
         private readonly ApplicationDbContext db;
-
-
         public ProductMasterController(ApplicationDbContext context)
 
         {
             this.db = context;
-
         }
 
         [HttpPost("AddProduct")]

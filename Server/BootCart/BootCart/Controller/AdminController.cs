@@ -11,7 +11,7 @@ namespace BootCart.Controller
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> userManager;
-        public AdminController(ApplicationDbContext db, UserManager<ApplicationUser> userManager,)
+        public AdminController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
 
         {
             this.db = db;

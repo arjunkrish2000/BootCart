@@ -18,7 +18,7 @@ namespace BootCart.Data
                .HasOne(m => m.Product)
                .WithMany(m => m.Addtocart)
                .OnDelete(DeleteBehavior.NoAction);
-
+           
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

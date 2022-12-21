@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Reflection;
+using System.Security.Claims;
 using BootCart.Model.RequestModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -30,15 +31,21 @@ namespace BootCart.Controller
             var id = HttpContext.User.FindFirstValue("UserId");
             if (id == null)
                 return NotFound();
-
+            //var product = db.ProductSpecifications.ToListAsync();
+            //foreach(var item in product)
+            //{
+            //    if(item)
+            //}
             db.OrderItems.Add(new OrderItem()
             {
                 UserId= id,
                 ProductId=1,
                 Quantity=model.Quantity,
                 IndividulaItemPrice=model.IndividulaItemPrice
-            });    
-           await db.SaveChangesAsync();
+            });
+            var Item = await db.Carts.FindAsync(model.ProductId);
+            db.Carts.Remove(Item);
+            await db.SaveChangesAsync();
             return Ok();
         }
         [HttpPut("UpdateOrderItem")]
@@ -86,6 +93,9 @@ namespace BootCart.Controller
         public async Task<IActionResult> Addtocart(CartModel model)
         {
             var id = HttpContext.User.FindFirstValue("UserId");
+            var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
+            if (product.ItemQuantity < model.Quantity)
+                return Ok("OutOfStock");
             if (id == null)
                 return NotFound();
 
@@ -108,8 +118,9 @@ namespace BootCart.Controller
             var Items = await db.Carts.FindAsync(model.Id);
             if (Items == null)
                 return NotFound();
+
             Items.UserId = id;
-            Items.ProductId = 3;
+            Items.ProductId = 3;                
             Items.Quantity = model.Quantity;
             await db.SaveChangesAsync();
             return Ok("Updated the cart");
@@ -166,6 +177,25 @@ namespace BootCart.Controller
             var id = HttpContext.User.FindFirstValue("UserId");
             var Cart = db.Orders.Where(i => i.CustomerId == id);
             return Ok(Cart);
+        
+        }
+        [HttpPut("UpdateProfile")]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+
+        public async Task<IActionResult> UpdateProfile(RegisterRequestModel model)
+        {
+            var user = await db.ApplicationUsers.FindAsync(model.Id);
+            if (user == null)
+                return NotFound();
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.Gender = model.Gender;
+            user.PhoneNumber = model.PhoneNumber;
+            user.DateOfBirth = model.DateOfBirth;
+            await db.SaveChangesAsync();
+            return Ok(user);
         }
     }   
 }
