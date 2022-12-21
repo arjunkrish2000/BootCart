@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Routes, RouterModule } from '@angular/router'; // CLI imports router
 
 @Component({
   selector: 'app-customer-navbar',
@@ -7,4 +11,16 @@ import { Component } from '@angular/core';
 })
 export class CustomerNavbarComponent {
 
-}
+  /**
+   *
+   */
+  constructor(private router:Router) {
+    
+  }
+	checkLogout(){
+
+          localStorage.removeItem('token')
+					this.router.navigate(["/"]);
+					}
+				}
+			

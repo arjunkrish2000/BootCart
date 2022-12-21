@@ -13,6 +13,7 @@ import { ProductmasterModule } from './productmaster/productmaster.module';
 import { CookieService } from 'ngx-cookie-service';
 import { ErrorInterceptor } from './helpers/interceptors/errorInterceptor';
 import { JwtInterceptor } from './helpers/interceptors/jwtInterceptor';
+import { AuthGuard } from './helpers/authGuard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,24 @@ import { JwtInterceptor } from './helpers/interceptors/jwtInterceptor';
     HttpClientModule,
     CustomerModule,
      AdminModule,
-    ProductmasterModule
+    ProductmasterModule,
+    RouterModule.forRoot([
+      {
+        path: '', loadChildren: () => import('./public/public-routing.module').then(m => m.PublicRoutingModule)
+      },
+      {
+        path: 'auth', loadChildren: () => import('./auth/auth-routing.module').then(m => m.AuthRoutingModule)
+      },
+      {
+        path: 'productmaster', loadChildren: () => import('./productmaster/productmaster-routing.module').then(m => m.ProductmasterRoutingModule), canActivate: [AuthGuard]
+      },
+      {
+        path: 'customer', loadChildren: () => import('./customer/customer-routing.module').then(m => m.CustomerRoutingModule), canActivate: [AuthGuard]
+      },
+      {
+        path: 'admin', loadChildren: () => import('./admin/admin-routing.module').then(m => m.AdminRoutingModule), canActivate: [AuthGuard]
+      },
+    ]),
   ],
   providers: [CookieService, [
     {
