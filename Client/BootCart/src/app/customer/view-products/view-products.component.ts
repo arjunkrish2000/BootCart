@@ -9,12 +9,13 @@ import { CustomerService } from '../customer.service';
 })
 export class ViewProductsComponent {
   products:any
-  constructor(private customerService:CustomerService){}
+	constructor(private customerService:CustomerService) { }
 
-  ngOnInIt(){
-    this.customerService.ViewProducts().subscribe(response => {
-      this.products = response;
-      console.log(response);
-    })
-  }
+	ngOnInit() {
+    this.customerService.ViewProducts()
+      .subscribe(response => {
+        this.products = response;
+        console.log(response);
+      });
+}
 }

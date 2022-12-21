@@ -17,6 +17,7 @@ const routes: Routes = [
     {path: 'view-bag', component: ViewBagComponent},
     {path: 'view-products', component: ViewProductsComponent},
     {path: 'invoice', component: InvoiceComponent},
+
   ]}
 ];
 

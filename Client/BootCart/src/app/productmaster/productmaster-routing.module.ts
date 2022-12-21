@@ -7,6 +7,7 @@ import { ProductmasterLayoutComponent } from './productmaster-layout.component';
 
 const routes: Routes = [
   {path: '', component: ProductmasterLayoutComponent, children:[
+    {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'add-product', component: AddProductComponent},
     {path: 'add-product-specification/:id', component: AddProductSpecificationComponent},

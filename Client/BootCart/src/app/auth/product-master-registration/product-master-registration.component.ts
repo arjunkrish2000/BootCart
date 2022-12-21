@@ -12,7 +12,7 @@ export class ProductMasterRegistrationComponent {
 
   handleRegister(form:any){
     console.log(form.value);
-    this.registerService.register(form.value).subscribe({
+    this.registerService.registerProductMaster(form.value).subscribe({
         next:(responce)=>{
           console.log(responce);
         }

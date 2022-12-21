@@ -24,6 +24,7 @@ import { PublicModule } from '../public/public.module';
     ViewProductsComponent,
     OrderHistoryComponent,
     InvoiceComponent,
+    
   ],
   imports: [
     CommonModule,

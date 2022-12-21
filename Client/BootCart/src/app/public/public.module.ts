@@ -13,7 +13,8 @@ import { FooterComponent } from './footer/footer.component';
     NavbarComponent,
     HomeComponent,
     PublicLayoutComponent,
-    FooterComponent
+    FooterComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -22,6 +23,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   exports: [
     NavbarComponent,
+    FooterComponent
   ]
 })
 export class PublicModule { }
