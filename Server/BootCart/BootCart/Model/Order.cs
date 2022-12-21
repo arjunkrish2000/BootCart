@@ -10,9 +10,9 @@ namespace BootCart.Model
         [ForeignKey(nameof(User))]
         public string CustomerId { get; set; }
 
-        public Order Orders { get; set; }
-        [ForeignKey(nameof(Orders))]
-        public int OrderId { get; set; }
+        public OrderItem OrderItems { get; set; }
+        [ForeignKey(nameof(OrderItems))]
+        public long OrderItemId { get; set; }
         public DateTime OrderedDate { get; set; } = DateTime.Now;
 
         public DateTime DeliveryDate { get; set; }
