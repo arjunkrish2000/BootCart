@@ -1,1 +1,24 @@
-<p>productmaster-navbar works!</p>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="text-info" routerLink="/" routerLinkActive="active"> 
+            <h3 class="logo"><span class="text-white">Boot</span>Cart</h3></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" style="color: aliceblue; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" aria-current="page" href="productmaster/add-product">Add to cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active " style="color: aliceblue; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;" href="/">Logout</a>
+          </li>
+          
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-info" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
