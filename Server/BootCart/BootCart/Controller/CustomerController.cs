@@ -14,10 +14,10 @@ namespace BootCart.Controller
         private readonly UserManager<ApplicationUser> userManager;
 
         public CustomerController(
-            ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+            ApplicationDbContext db, UserManager<ApplicationUser> userManager)
 
         {
-            this.db = context;
+            this.db = db;
             this.userManager = userManager;
         }
 
@@ -159,6 +159,13 @@ namespace BootCart.Controller
             await db.SaveChangesAsync();
             return Ok("PlacedOrder");
         }
-        
+        [HttpGet("ViewOrder")]
+
+        public async Task<IActionResult> ViewOrder()
+        {
+            var id = HttpContext.User.FindFirstValue("UserId");
+            var Cart = db.Orders.Where(i => i.CustomerId == id);
+            return Ok(Cart);
+        }
     }   
 }

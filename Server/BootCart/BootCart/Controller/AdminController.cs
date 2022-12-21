@@ -1,4 +1,5 @@
-﻿using BootCart.Model;
+﻿using System.Security.Claims;
+using BootCart.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +9,12 @@ namespace BootCart.Controller
     [ApiController]
     public class AdminController : ControllerBase
     {
+        private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> userManager;
-        public AdminController( UserManager<ApplicationUser> userManager)
+        public AdminController(ApplicationDbContext db, UserManager<ApplicationUser> userManager,)
 
         {
+            this.db = db;
             this.userManager = userManager;
         }
         [HttpGet("ProductMasterView")]
@@ -32,6 +35,13 @@ namespace BootCart.Controller
                 return NotFound();
             return Ok(users);
         }
+        [HttpGet("OrderView")]
 
+        public async Task<IActionResult> OrderView()
+        {
+            
+            var order = await db.Orders.ToListAsync();
+            return Ok(order);
+        }
     }
 }
