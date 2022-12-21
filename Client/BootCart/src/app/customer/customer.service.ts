@@ -12,4 +12,7 @@ export class CustomerService {
   ViewProducts(){
     return this.http.get(`${StaticDetails.API_URL}/customer/viewproducts`);
   }
+  ViewOrderHistory(){
+    return this.http.get(`${StaticDetails.API_URL}/customer/orderhistory`)
+  }
 }
