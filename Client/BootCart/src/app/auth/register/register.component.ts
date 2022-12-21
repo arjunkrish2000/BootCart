@@ -15,7 +15,7 @@ export class RegisterComponent {
     console.log(form.value);
     this.registerService.register(form.value).subscribe({
         next:(responce)=>{
-          console.log(responce);
+          this.router.navigate(['/login']);
         }
     })
   }
