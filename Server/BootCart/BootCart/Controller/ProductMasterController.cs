@@ -52,7 +52,7 @@ namespace BootCart.Controller
                Color = model.Color,
                Material = model.Material,
                Size = model.Size,
-               ItemQty = model.ItemQty,
+               ItemQuantity = model.ItemQty,
                ProductId = model.Pid
             });
             await db.SaveChangesAsync();

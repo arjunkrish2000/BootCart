@@ -4,7 +4,7 @@
 
 namespace BootCart.Migrations
 {
-    public partial class Tables : Migration
+    public partial class UpdateTableProductSpecifications : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

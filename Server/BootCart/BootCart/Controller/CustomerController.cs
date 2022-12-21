@@ -153,7 +153,8 @@ namespace BootCart.Controller
                DeliveryDate=model.DeliveryDate,
                Address = model.Address,
                TotalAmount = model.TotalAmount,
-               Status="Pending"
+               Status="Pending",
+
             });
             await db.SaveChangesAsync();
             return Ok("PlacedOrder");

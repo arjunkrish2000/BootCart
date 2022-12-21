@@ -10,6 +10,9 @@ namespace BootCart.Model
         [ForeignKey(nameof(User))]
         public string CustomerId { get; set; }
 
+        public Order Orders { get; set; }
+        [ForeignKey(nameof(Orders))]
+        public int OrderId { get; set; }
         public DateTime OrderedDate { get; set; } = DateTime.Now;
 
         public DateTime DeliveryDate { get; set; }
@@ -20,7 +23,6 @@ namespace BootCart.Model
         public Double TotalAmount { get; set; }
 
         public String Status { get; set; }
-
 
     }
 }
