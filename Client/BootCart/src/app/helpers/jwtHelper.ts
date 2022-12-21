@@ -11,10 +11,10 @@ class JwtHelper{
         return localStorage.getItem('token');
     }
 
-    public isTokenExpired():boolean{
+    public async isTokenExpired():Promise<boolean>{
         const helper = new JwtHelperService();
         const token:any = localStorage.getItem('token');
-        const isExpired = helper.isTokenExpired(token);
+        const isExpired = await helper.isTokenExpired(token);
         return isExpired;
     }
 
