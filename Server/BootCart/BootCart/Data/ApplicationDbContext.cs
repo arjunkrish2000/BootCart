@@ -23,7 +23,6 @@ namespace BootCart.Data
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ProductMaster> ProductMasters { get; set; }
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductSpecification> ProductSpecifications { get; set; }
         public DbSet<Order> Orders { get; set; }

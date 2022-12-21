@@ -1,6 +1,7 @@
 ﻿using BootCart.Model.RequestModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace BootCart.Controller
@@ -66,22 +67,7 @@ namespace BootCart.Controller
             var stock = db.Products.Where(i => i.ApplicationUserId == id);
             return Ok(stock);
         }
-        [HttpDelete("DeleteProduct")]
-        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteProduct(int Id)
-        {
-            var Product= await db.Products.FindAsync(Id);
-            var ProductSpecification = await db.ProductSpecifications.FindAsync(Id);
-            if (Product == null && ProductSpecification == null)
-            {
-                return NotFound();
-            }
-            db.Products.Remove(Product);
-            db.ProductSpecifications.Remove(ProductSpecification);
-            await db.SaveChangesAsync();
-            return Ok("The corresponding product and specifications are  deleted");
-        }
+     
 
         [HttpPut("UpdateProduct")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]

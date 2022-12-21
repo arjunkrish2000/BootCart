@@ -14,11 +14,13 @@ namespace BootCart.Model
 
         public DateTime DeliveryDate { get; set; }
 
-        public Address Address { get; set; }
-        [ForeignKey(nameof(Address))]
-        public int AddressId { get; set; }
+        [StringLength(100)]
+        public String Address { get; set; }
+      
+        public Double TotalAmount { get; set; }
 
-        public double TotalAmount { get; set; }
+        public String Status { get; set; }
+
 
     }
 }

@@ -19,6 +19,8 @@ namespace BootCart.Controller
         public async Task<ActionResult> ProductView()
         {
             var users = await userManager.GetUsersInRoleAsync("ProductMaster");
+            if(users == null)
+                return NotFound();
             return Ok(users);
         }
         [HttpGet("CustomerView")]
@@ -26,6 +28,8 @@ namespace BootCart.Controller
         public async Task<ActionResult> CustomerView()
         {
             var users = await userManager.GetUsersInRoleAsync("Customer");
+            if (users == null)
+                return NotFound();
             return Ok(users);
         }
 
