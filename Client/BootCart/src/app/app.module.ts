@@ -24,7 +24,7 @@ import { CookieService } from 'ngx-cookie-service';
     AuthModule,
     HttpClientModule,
     CustomerModule,
-    AdminModule,
+    // AdminModule,
     ProductmasterModule
   ],
   providers: [CookieService],
