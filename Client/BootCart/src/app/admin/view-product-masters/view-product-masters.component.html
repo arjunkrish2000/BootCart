@@ -1,1 +1,16 @@
-<p>view-product-masters works!</p>
+<div>
+    <table>
+        <tr>
+            <th>Brand Name</th>
+            <th>YOP</th>
+            <th>License Number</th>
+            <th>Status</th>
+        </tr>
+        <tr *ngFor="let order of productMaster">
+            <td>{{productMaster.brandName}}</td>
+            <td>{{productMaster.YOP}}</td>
+            <td>{{productMaster.licenseNumber}}</td>
+            <td>{{productMaster.status}}</td>
+        </tr>
+    </table>
+</div>
