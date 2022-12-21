@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductMasterService } from '../product-master.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProductMasterService } from '../product-master.service';
 export class AddProductSpecificationComponent {
   product:any
   pid:any
-  constructor(private route:ActivatedRoute,private pmService:ProductMasterService){}
+  constructor(private route:ActivatedRoute,private pmService:ProductMasterService,private router:Router){}
 
 
   addProductSpecification(form:any){
@@ -24,7 +24,7 @@ export class AddProductSpecificationComponent {
     console.log(data.pid);
     this.pmService.AddSpecification(data).subscribe({
         next:(responce)=>{
-          console.log(responce);
+          this.router.navigate(["/add-product"]);
         }
     })
   }

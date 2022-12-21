@@ -1,8 +1,18 @@
-<div>
-    <div *ngFor="let product of products">
-        <div>{{product.name}}</div>
-        <div>{{product.price}}</div>
-        <div class="btn btn-primary">Add To cart</div>
-    </div>
 
+<div class="row   ">
+
+<div class="card " *ngFor="let product of products">
+    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.webp" alt="Card image cap">
+    <div class="card-body ">
+      
+    <h5 class="card-title">{{product.color}}</h5>
+    <h5 class="card-title">{{product.material}}</h5>
+
+</div>
+<div class="card-footer d-flex">
+    <a  class="btn btn-info  ">Add to Bag</a>
+</div>
+ 
+   
+  </div>
 </div>
