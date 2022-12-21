@@ -1,12 +1,15 @@
 
-  <div class="container">
+ 
+   <div class="d-flex">
 
-    <div class="row">
-
+    <div class="box ">
+      <div class="col-sm-10 offset-sm-1">
+<h1>Add Products.</h1>
         <form #form="ngForm" (ngSubmit)="addProduct(form);">
 
             <div>
-              <label for="productType">Type of Shoe</label>
+              
+              <label for="productType">Type of Shoe :    </label>
                 <select ngModel #productType="ngModel" name="productType">
                   <option>Sneakers</option>
                   <option>Boots</option>
@@ -16,9 +19,10 @@
                 </select>
 
             </div>
+            
 
             <div>
-                <label for="productCategory">Category</label>
+                <label for="productCategory">Category :  </label>
                   <select ngModel #productCategory="ngModel" name="productCategory">
                     <option>Men</option>
                     <option>Women</option>
@@ -48,7 +52,7 @@
                 <input ngModel #productImage="ngModel" type="file" name="productImage" class="form-control">
 
             </div>
-
+<br>
             <div class="d-grid mt-2">
 
                 <button class="btn btn-primary">Add to Stock</button>
@@ -56,15 +60,18 @@
             </div>
 
         </form>
-
+</div>
     </div>
 
-</div>
 
-<div>
-  <div><h1>In-Stock</h1></div>
+
+<div class=" box">
+  <div class="col-sm-10 offset-sm-1"><h1>In-Stock</h1></div>
   <div *ngFor="let product of stock">
+    <div class="d-flex">
     <div>{{product.productType}}</div>
     <div class="btn btn-primary">   <a routerLink="/add-product-specification/{{product.id}}">Add specification</a></div>
   </div>
+  </div>
+</div>
 </div>

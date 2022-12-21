@@ -9,6 +9,9 @@ import { RouterModule } from '@angular/router';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service/public-api';
+import { AddProductSpecificationComponent } from './add-product-specification/add-product-specification.component';
+import { NavbarComponent } from '../public/navbar/navbar.component';
+import { PublicModule } from '../public/public.module';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { CookieService } from 'ngx-cookie-service/public-api';
     ProductmasterRoutingModule,
     RouterModule,
     FormsModule,
+    PublicModule
   ]
 })
 export class ProductmasterModule { }
