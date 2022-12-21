@@ -10,6 +10,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service/public-api';
 import { AddProductSpecificationComponent } from './add-product-specification/add-product-specification.component';
+import { PublicModule } from '../public/public.module';
 
 
 @NgModule({
@@ -18,13 +19,15 @@ import { AddProductSpecificationComponent } from './add-product-specification/ad
     ProductmasterLayoutComponent,
     ProductmasterNavbarComponent,
     AddProductComponent,
-    AddProductSpecificationComponent
+    AddProductSpecificationComponent,
+    
   ],
   imports: [
     CommonModule,
     ProductmasterRoutingModule,
     RouterModule,
     FormsModule,
+    PublicModule
   ]
 })
 export class ProductmasterModule { }
