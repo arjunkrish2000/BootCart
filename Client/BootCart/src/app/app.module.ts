@@ -26,7 +26,7 @@ import { JwtInterceptor } from './helpers/interceptors/jwtInterceptor';
     AuthModule,
     HttpClientModule,
     CustomerModule,
-    // AdminModule,
+     AdminModule,
     ProductmasterModule
   ],
   providers: [CookieService, [
