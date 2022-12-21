@@ -10,32 +10,22 @@ namespace BootCart.Controller
     public class ProductMasterController : ControllerBase
     {
         private readonly ApplicationDbContext db;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IConfiguration configuration;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly SignInManager<ApplicationUser> signinManager;
 
-        public ProductMasterController(
-            ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager, IConfiguration configuration,
-            RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signinManager)
+
+        public ProductMasterController(ApplicationDbContext context)
 
         {
             this.db = context;
-            this.userManager = userManager;
-            this.configuration = configuration;
-            this.roleManager = roleManager;
-            this.signinManager = signinManager;
+
         }
 
         [HttpPost("AddProduct")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> Post(ProductViewModel model)
+        public async Task<IActionResult> AddProduct(ProductViewModel model)
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            
+
             db.Products.Add(new Product()
             {
                 ProductType = model.ProductType,
@@ -45,17 +35,16 @@ namespace BootCart.Controller
                 AddedDate = DateTime.Now,
                 Price = model.Price,
                 ApplicationUserId = id
-            });
-            db.SaveChanges();
-            return Ok(model);
+            }) ;
+            await db.SaveChangesAsync();
+            return Ok("Product details succesfully added");
         }
 
         [HttpPost("AddProductSpecification")]
         [ProducesResponseType(typeof(ProductSpecification), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> AddProductSpecification(ProductViewModel model,int pid)
+        public async Task<IActionResult> AddProductSpecification(ProductSpecificationModel model)
         {
-            var id = HttpContext.User.FindFirstValue("UserId");
 
             db.ProductSpecifications.Add(new ProductSpecification()
             {
@@ -63,10 +52,10 @@ namespace BootCart.Controller
                Material = model.Material,
                Size = model.Size,
                ItemQty = model.ItemQty,
-               ProductId = pid
+               ProductId = model.Pid
             });
-            db.SaveChanges();
-            return Ok(model);
+            await db.SaveChangesAsync();
+            return Ok("Product specification details succesfully added");
         }
 
         [HttpGet("ViewStock")]
@@ -77,6 +66,44 @@ namespace BootCart.Controller
             var stock = db.Products.Where(i => i.ApplicationUserId == id);
             return Ok(stock);
         }
+        [HttpDelete("DeleteProduct")]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteProduct(int Id)
+        {
+            var Product= await db.Products.FindAsync(Id);
+            var ProductSpecification = await db.ProductSpecifications.FindAsync(Id);
+            if (Product == null && ProductSpecification == null)
+            {
+                return NotFound();
+            }
+            db.Products.Remove(Product);
+            db.ProductSpecifications.Remove(ProductSpecification);
+            await db.SaveChangesAsync();
+            return Ok("The corresponding product and specifications are  deleted");
+        }
 
+        [HttpPut("UpdateProduct")]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+
+        public async Task<IActionResult> UpdateProduct(ProductViewModel model)
+        {
+            var id = HttpContext.User.FindFirstValue("UserId");
+            var prdct = await db.Products.FindAsync(model.Id);
+            if (prdct == null)
+                return NotFound();
+            prdct.ProductType = model.ProductType;
+            prdct.ProductCategory = model.ProductCategory;
+            prdct.Quantity = model.Quantity;
+            prdct.ProductImage = model.ProductImage;
+            prdct.AddedDate = DateTime.Now;
+            prdct.Price = model.Price;
+            prdct.ApplicationUserId = id;
+            await db.SaveChangesAsync(); 
+            return Ok("The product details has been succesfully updated");
+        }
     }
 }
+
+  

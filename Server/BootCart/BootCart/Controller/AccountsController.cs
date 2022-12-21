@@ -177,25 +177,6 @@ namespace BootCart.Controller
             return Ok(user);
             return Ok(model);
         }
-        //[HttpPut("UpdateCustomer")]
-        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status200OK)]
-        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
-
-
-
-
-
-        //public async Task<IActionResult> put(RegisterRequestModel model)
-        //{
-        //    var Customer = await db.ApplicationUsers.FindAsync(model.CustomerId);
-        //    if (Customer == null)
-        //        return NotFound();
-        //    Customer.FirstName = model.FirstName;
-        //    Customer.LastName = model.LastName;
-        //    Customer.Email = model.Email;
-        //    Customer.PhoneNumber = model.PhoneNumber;
-        //    await db.SaveChangesAsync();
-        //    return Ok(Customer);
-        //}
+        
     }
 }
