@@ -17,6 +17,7 @@ import { CookieService } from 'ngx-cookie-service/public-api';
     ProductmasterLayoutComponent,
     ProductmasterNavbarComponent,
     AddProductComponent,
+    AddProductSpecificationComponent,
   ],
   imports: [
     CommonModule,

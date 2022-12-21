@@ -6,12 +6,14 @@ import { PublicRoutingModule } from './public-routing.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { PublicLayoutComponent } from './public-layout.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     HomeComponent,
-    PublicLayoutComponent
+    PublicLayoutComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

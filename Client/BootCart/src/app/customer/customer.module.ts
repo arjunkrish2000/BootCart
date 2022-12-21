@@ -11,7 +11,7 @@ import { ViewBagComponent } from './view-bag/view-bag.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { FormsModule } from '@angular/forms';
+import { PublicModule } from '../public/public.module';
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     CustomerRoutingModule,
     RouterModule,
-    FormsModule
+    PublicModule
   ]
 })
 export class CustomerModule { }
