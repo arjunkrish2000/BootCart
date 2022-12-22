@@ -15,8 +15,11 @@ export class CustomerService {
   ViewOrderHistory(){
     return this.http.get(`${StaticDetails.API_URL}/customer/orderhistory`)
   }
-  ViewUserProfile(){
-    return this.http.get(`${StaticDetails.API_URL}/customer/updateprofile`)
+  viewUserProfile(){
+    return this.http.get(`${StaticDetails.API_URL}/customer/GetUser`)
+  }
+  UpdateProfile(data:any){
+    return this.http.put(`${StaticDetails.API_URL}/customer/updateprofile`,data)
   }
   ViewCart(){
     return this.http.get(`${StaticDetails.API_URL}/customer/viewcart`)
