@@ -19,7 +19,7 @@ export class CustomerNavbarComponent {
   }
 	checkLogout(){
 
-          localStorage.removeItem('token')
+          localStorage.removeItem('token');
 					this.router.navigate(["/"]);
 					}
 				}
