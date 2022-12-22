@@ -42,7 +42,7 @@ namespace BootCart.Controller
             db.OrderItems.Add(new OrderItem()
             {
                 UserId= id,
-                ProductId=1,
+               // ProductId=1,
                 Quantity=model.Quantity,
                 IndividulaItemPrice=model.IndividulaItemPrice
             });
@@ -61,7 +61,7 @@ namespace BootCart.Controller
             if (Items == null)
                 return NotFound();
             Items.UserId = id;
-            Items.ProductId = 1;
+           // Items.ProductId = 1;
             Items.Quantity = model.Quantity;
             Items.IndividulaItemPrice = model.IndividulaItemPrice;
             await db.SaveChangesAsync();
@@ -145,10 +145,8 @@ namespace BootCart.Controller
         public async Task<IActionResult> ViewCart()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            //var Cart = db.Carts.Where(i => i.UserId == id);
-            var x = await db.Carts.Include(i => i.Product).Where(i => i.UserId == id).ToListAsync();
-           // var stock = await db.Products.ToListAsync();
-            return Ok(x);
+            var cart = await db.Carts.Include(i => i.ProductSpecification).ThenInclude(i => i.Products).Where(i => i.UserId == id).ToListAsync();
+            return Ok(cart);
         }
         [HttpPost("PlaceOrder")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]

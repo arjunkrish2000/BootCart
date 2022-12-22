@@ -8,12 +8,14 @@
         public ApplicationUser User { get; set; }
         [ForeignKey(nameof(User))]
         public String UserId { get; set; }
-        public Product Product { get; set; }
-        [ForeignKey(nameof(Product))]
-        public int ProductId { get; set; }
+        public ProductSpecification ProductSpecification { get; set; }
+        [ForeignKey(nameof(ProductSpecification))]
+        public int ProductSpecificationId { get; set; }
         public int Quantity { get; set; }
 
         public int IndividulaItemPrice { get; set; }
+
+        public IEnumerable<ProductSpecification> Specifications { get; set; }
 
     }
 }
