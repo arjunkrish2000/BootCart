@@ -13,7 +13,8 @@ export class CustomerNavbarComponent {
 
   constructor(private router:Router) {}
 	checkLogout(){
-          localStorage.removeItem('token')
+
+          localStorage.removeItem('token');
 					this.router.navigate(["/"]);
 					}
 }
