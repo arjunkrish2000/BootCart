@@ -89,10 +89,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseHttpsRedirection();
 app.UseCors("CorsPolicy");
+
+var path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources");
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"Resources"));
 app.UseStaticFiles();
 app.UseStaticFiles(new StaticFileOptions()
 {
-    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+    FileProvider = new PhysicalFileProvider(path),
     RequestPath = new PathString("/Resources")
 });
 
