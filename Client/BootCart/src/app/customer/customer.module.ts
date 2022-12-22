@@ -12,6 +12,7 @@ import { ViewProductsComponent } from './view-products/view-products.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { PublicModule } from '../public/public.module';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { PublicModule } from '../public/public.module';
     ViewProductsComponent,
     OrderHistoryComponent,
     InvoiceComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

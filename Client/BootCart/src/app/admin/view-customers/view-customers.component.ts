@@ -18,5 +18,4 @@ export class ViewCustomersComponent {
         console.log(response);
       });
 }
-
 }
