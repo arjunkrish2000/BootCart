@@ -90,25 +90,26 @@ namespace BootCart.Controller
             // var stock = await db.Products.ToListAsync();
             return Ok(orderItems);
         }
-        [HttpPost("Addtocart")]
+        [HttpGet("AddToCart/{id}")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> AddToCart(CartModel model)
+        public async Task<IActionResult> AddToCart(int id)
         {
-            var id = HttpContext.User.FindFirstValue("UserId");
+            var userId = HttpContext.User.FindFirstValue("UserId");
+
             //var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
 
-            if (id == null)
-                return NotFound();
+            //if (id == null)
+            //    return NotFound();
 
             db.Carts.Add(new Cart()
             {
-                UserId =id,
-                ProductId = model.ProductId,
+                UserId = userId,
+                ProductId = id,
             });
 
             await db.SaveChangesAsync();
-            return Ok(model);
+            return Ok(id);
         }
         //[HttpPut("UpdateCart")]
         //[ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
@@ -144,9 +145,10 @@ namespace BootCart.Controller
         public async Task<IActionResult> ViewCart()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var Cart = db.Carts.Where(i => i.UserId == id);
+            //var Cart = db.Carts.Where(i => i.UserId == id);
+            var x = await db.Carts.Include(i => i.Product).Where(i => i.UserId == id).ToListAsync();
            // var stock = await db.Products.ToListAsync();
-            return Ok(Cart);
+            return Ok(x);
         }
         [HttpPost("PlaceOrder")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]

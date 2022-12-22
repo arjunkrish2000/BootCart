@@ -35,7 +35,7 @@ namespace BootCart.Controller
                 ApplicationUserId = id
             }) ;
             await db.SaveChangesAsync();
-            return Ok("Product details succesfully added");
+            return Ok(model);
         }
 
         [HttpPost("AddProductSpecification")]
@@ -60,13 +60,21 @@ namespace BootCart.Controller
 
         [HttpGet("ViewStock")]
 
-        public async Task<IActionResult> Viewstock()
+        public async Task<IActionResult> ViewStock()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.UserId == id).ToListAsync() ;
+            var stock = await db.Products.Where(i => i.ApplicationUserId == id).ToListAsync() ;
             return Ok(stock);
         }
-     
+
+        [HttpGet("ViewInStockProducts")]
+
+        public async Task<IActionResult> ViewInStockProducts()
+        {
+            var id = HttpContext.User.FindFirstValue("UserId");
+            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.UserId == id).ToListAsync();
+            return Ok(stock);
+        }
 
         [HttpPut("UpdateProduct")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
