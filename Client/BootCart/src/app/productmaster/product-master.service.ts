@@ -12,6 +12,9 @@ export class ProductMasterService {
   ViewStock(){
     return this.http.get(`${StaticDetails.API_URL}/productmaster/viewstock`)
   }
+  ViewInStockProducts(){
+    return this.http.get(`${StaticDetails.API_URL}/productmaster/viewinstockproducts`)
+  }
   AddProduct(data: any){
     return this.http.post(`${StaticDetails.API_URL}/productmaster/addproduct`, data);
   }
