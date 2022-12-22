@@ -66,6 +66,14 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+var directory = Path.Join(Directory.GetCurrentDirectory(), "ProductImages");
+Console.WriteLine(directory);
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(directory),
+    RequestPath = "/static"
+});
+
 app.UseCors(options =>
 {
     options.AllowAnyHeader();
