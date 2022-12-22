@@ -69,6 +69,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
+
+var path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources");
+Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), @"Resources"));
+app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(path),
+    RequestPath = new PathString("/Resources")
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
