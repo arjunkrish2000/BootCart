@@ -14,7 +14,7 @@ export class ProductMasterRegistrationComponent {
     console.log(form.value);
     this.registerService.registerProductMaster(form.value).subscribe({
         next:(responce)=>{
-          console.log(responce);
+          this.router.navigate(['/login']);
         }
     })
   }

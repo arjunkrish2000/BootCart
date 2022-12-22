@@ -1,20 +1,32 @@
-h1{
-    margin-top: 20px;
-    margin-left: 50px;
-    color: #455087;
-}
 .card{
-    width:300px;
-    height:30px;
-    margin-top: 40px;
     margin-left: 40px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 8px;
+    background-color: aliceblue;
 
 }
-.card-body{
-    box-shadow: 1px 1px 10px;
+.btn{
+    width:155px;
 }
-.card-img-top{
-    box-shadow: 1px 1px 10px;
 
-
+.row
+{
+    width:  100%;
+}
+img{
+    margin-top: 10px;
+}
+.bi{
+    
+    margin-left: 165px;
+    margin-top: 10px;
+    color: rgb(234, 67, 104);
+}
+.hide {
+    display: none;
+  }
+  
+  .bi:hover + .hide {
+    display: block;
+    color: rgb(234, 67, 104);
 }

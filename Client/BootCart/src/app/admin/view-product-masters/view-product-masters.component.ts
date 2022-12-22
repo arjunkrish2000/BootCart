@@ -14,7 +14,7 @@ export class ViewProductMastersComponent {
     this.viewService.GetProductMasters()
       .subscribe(response => {
         this.productMaster = response;
-        console.log(response);
+        console.log(this.productMaster);
       });
 }
 }

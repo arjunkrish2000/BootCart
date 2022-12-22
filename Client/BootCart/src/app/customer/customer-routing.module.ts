@@ -12,10 +12,10 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
   {path: '', component: CustomerLayoutComponent, children:[
-    {path: 'home', component: HomeComponent},
+    {path: '', component: HomeComponent},
     {path: 'wishlist', component: WishlistComponent},
     {path: 'order-history', component: OrderHistoryComponent},
-    {path: 'view-bag', component: ViewBagComponent},
+    {path: 'view-bag/:id', component: ViewBagComponent},
     {path: 'view-products', component: ViewProductsComponent},
     {path: 'invoice', component: InvoiceComponent},
     {path: 'profile', component: ProfileComponent},

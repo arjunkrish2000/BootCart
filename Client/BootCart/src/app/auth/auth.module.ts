@@ -20,7 +20,7 @@ import { ProductMasterRegistrationComponent } from './product-master-registratio
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    PublicModule,
+    PublicModule
   ]
 })
 export class AuthModule { }

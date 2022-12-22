@@ -70,7 +70,7 @@
   <div *ngFor="let product of stock">
     <br>
     <div class="d-flex">
-    <div class="type">{{product.productType}}   :</div>
+    <div class="type">{{product.products.productType}}   :</div>
       <a  class="btn btn-primary"routerLink="/add-product-specification/{{product.id}}">Add specification</a>
   </div>
 

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { PublicService } from '../public.service';
 
 @Component({
   selector: 'public-home',
@@ -7,7 +8,14 @@ import { Component, Input } from '@angular/core';
 })
 export class HomeComponent {
   @Input() view: 'grid' | 'list' = 'grid';
-  constructor() {}
+  products:any
+	constructor(private publicService:PublicService) { }
 
-  ngOnInit(): void {}
+	ngOnInit() {
+    this.publicService.ViewProducts()
+      .subscribe(response => {
+        this.products = response;
+        console.log(response);
+      });
+}
 }
