@@ -43,7 +43,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.Order", b =>
@@ -90,7 +90,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.OrderItem", b =>
@@ -120,7 +120,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.Payment", b =>
@@ -141,7 +141,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.Product", b =>
@@ -182,7 +182,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.ProductMaster", b =>
@@ -216,7 +216,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductMasters");
+                    b.ToTable("ProductMasters", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.ProductSpecification", b =>
@@ -255,7 +255,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductSpecifications");
+                    b.ToTable("ProductSpecifications", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -35,7 +35,7 @@ namespace BootCart.Controller
                 ApplicationUserId = id
             }) ;
             await db.SaveChangesAsync();
-            return Ok(model);
+            return Ok("Product details succesfully added");
         }
 
         [HttpPost("AddProductSpecification")]
@@ -60,21 +60,13 @@ namespace BootCart.Controller
 
         [HttpGet("ViewStock")]
 
-        public async Task<IActionResult> ViewStock()
+        public async Task<IActionResult> Viewstock()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var stock = await db.Products.Where(i => i.ApplicationUserId == id).ToListAsync() ;
+            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.UserId == id).ToListAsync() ;
             return Ok(stock);
         }
-
-        [HttpGet("ViewInStockProducts")]
-
-        public async Task<IActionResult> ViewInStockProducts()
-        {
-            var id = HttpContext.User.FindFirstValue("UserId");
-            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.UserId == id).ToListAsync();
-            return Ok(stock);
-        }
+     
 
         [HttpPut("UpdateProduct")]
         [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
@@ -93,47 +85,6 @@ namespace BootCart.Controller
             prdct.Price = model.Price;
             await db.SaveChangesAsync(); 
             return Ok();
-        }
-
-
-        public class UploadImageRequest
-        {
-            public IFormFile ImageFile { get; set; }
-            public string Title { get; set; }
-        }
-
-
-
-        [HttpPost("UploadImage")]
-        public async Task<IActionResult> UploadImage([FromForm] UploadImageRequest uploadImageRequest)
-        {
-            string path = Path.Combine(Environment.CurrentDirectory, "ProductImages");
-            string fileName = Guid.NewGuid().ToString();
-
-
-
-            bool folderExists = Directory.Exists(path);
-            if (!folderExists)
-                Directory.CreateDirectory(path);
-
-
-
-            if (uploadImageRequest.ImageFile.Length > 0)
-            {
-                string filePath = Path.Combine(path, fileName + Path.GetExtension(uploadImageRequest.ImageFile.FileName));
-                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    await uploadImageRequest.ImageFile.CopyToAsync(fileStream);
-                }
-            }
-
-
-
-            //Store fileName , extension , imageTitle into product master table
-
-
-
-            return Ok("Image Uploaded");
         }
     }
 }

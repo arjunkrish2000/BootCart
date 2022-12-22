@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
 using BootCart.Model.RequestModels;
+using BootCart.Model.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -90,26 +91,25 @@ namespace BootCart.Controller
             // var stock = await db.Products.ToListAsync();
             return Ok(orderItems);
         }
-        [HttpGet("AddToCart/{id}")]
+        [HttpPost("Addtocart")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> AddToCart(CartModel model)
         {
-            var userId = HttpContext.User.FindFirstValue("UserId");
-
+            var id = HttpContext.User.FindFirstValue("UserId");
             //var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
 
-            //if (id == null)
-            //    return NotFound();
+            if (id == null)
+                return NotFound();
 
             db.Carts.Add(new Cart()
             {
-                UserId = userId,
-                ProductId = id,
+                UserId =id,
+                ProductId = model.ProductId,
             });
 
             await db.SaveChangesAsync();
-            return Ok(id);
+            return Ok(model);
         }
         //[HttpPut("UpdateCart")]
         //[ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
@@ -145,10 +145,9 @@ namespace BootCart.Controller
         public async Task<IActionResult> ViewCart()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            //var Cart = db.Carts.Where(i => i.UserId == id);
-            var x = await db.Carts.Include(i => i.Product).Where(i => i.UserId == id).ToListAsync();
+            var Cart = db.Carts.Where(i => i.UserId == id);
            // var stock = await db.Products.ToListAsync();
-            return Ok(x);
+            return Ok(Cart);
         }
         [HttpPost("PlaceOrder")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]
@@ -193,12 +192,13 @@ namespace BootCart.Controller
         }
 
         //[HttpPut("UpdateProfile")]
-        //[ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(ApplicationUser), StatusCodes.Status200OK)]
         //[ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
 
         //public async Task<IActionResult> UpdateProfile(RegisterRequestModel model)
         //{
-        //    var user = await db.ApplicationUsers.FindAsync(model.Id);
+        //    var id = HttpContext.User.FindFirstValue("UserId");
+        //    var user = await db.ApplicationUsers.FindAsync(id);
         //    if (user == null)
         //        return NotFound();
         //    user.FirstName = model.FirstName;
@@ -210,5 +210,43 @@ namespace BootCart.Controller
         //    await db.SaveChangesAsync();
         //    return Ok(user);
         //}
-    }   
+        //Get User Details
+        [HttpGet("GetUser")]
+        [ProducesResponseType(typeof(RegisterRequestModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetUser()
+        {
+            var userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var logedinuser = await userManager.FindByNameAsync(userName);
+            var user = new RegisterRequestModel()
+            {
+                FirstName = logedinuser.FirstName,
+                LastName = logedinuser.LastName,
+                Email = logedinuser.Email,
+                PhoneNumber= logedinuser.PhoneNumber,
+            
+            };
+            return Ok(new ResponseModel<RegisterRequestModel>()
+            {
+                Data = user,
+            });
+        }
+        //Updating User Details
+        [HttpPut("UpdateProfile")]
+        [ProducesResponseType(typeof(UpdateProfileModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileModel model)
+        {
+            var userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userManager.FindByNameAsync(userName);
+
+            if (user == null)
+                return NotFound();
+            user.FirstName = model.firstName;
+            user.LastName = model.lastName;
+            user.PhoneNumber = model.phoneNumber;
+            user.Email = model.email;
+            await db.SaveChangesAsync();
+            return Ok(user);
+        }
+   
+    }
 }

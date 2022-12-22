@@ -10,7 +10,16 @@ namespace BootCart.Data
 
         }
 
-   
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+               
+            builder.Entity<Cart>()
+               .HasOne(m => m.Product)
+               .WithMany(m => m.Addtocart)
+               .OnDelete(DeleteBehavior.NoAction);
+           
+        }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ProductMaster> ProductMasters { get; set; }
