@@ -13,18 +13,12 @@ export class ViewBagComponent {
   pid:any
   constructor(private route:ActivatedRoute,private customerService:CustomerService,private router:Router){}
   
-  ngOnInit(){
-    this.productId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(this.productId);
-    this.pid = parseInt(this.productId);
+  removeFromBag(pid:any){
     
-    this.customerService.AddToCart(this.pid).subscribe({
-      next:(responce)=>{
-        console.log(responce);
-        this.router.navigate(['view-bag'])
-      }
-  })
+  }
 
+  ngOnInit(){
+    
     this.customerService.ViewCart()
       .subscribe(response => {
         this.cart = response;
