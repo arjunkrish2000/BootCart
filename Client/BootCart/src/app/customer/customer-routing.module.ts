@@ -4,6 +4,7 @@ import { CustomerLayoutComponent } from './customer-layout.component';
 import { HomeComponent } from './home/home.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ProfileComponent } from './profile/profile.component';
 import { ViewBagComponent } from './view-bag/view-bag.component';
 import { ViewProductsComponent } from './view-products/view-products.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
@@ -17,7 +18,7 @@ const routes: Routes = [
     {path: 'view-bag/:id', component: ViewBagComponent},
     {path: 'view-products', component: ViewProductsComponent},
     {path: 'invoice', component: InvoiceComponent},
-
+    {path: 'profile', component: ProfileComponent},
   ]}
 ];
 
