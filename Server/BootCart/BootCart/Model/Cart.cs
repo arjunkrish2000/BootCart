@@ -10,6 +10,5 @@
         [ForeignKey(nameof(User))]
         public String UserId { get; set; }
 
-        public int Quantity { get; set; }
     }
 }

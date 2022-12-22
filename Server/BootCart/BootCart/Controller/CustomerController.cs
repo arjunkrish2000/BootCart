@@ -1,12 +1,15 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
 using BootCart.Model.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BootCart.Controller
 {
+    //[Authorize(Roles = "Customer")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -90,41 +93,38 @@ namespace BootCart.Controller
         [HttpPost("Addtocart")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> Addtocart(CartModel model)
+        public async Task<IActionResult> AddToCart(CartModel model)
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
-            if (product.ItemQuantity < model.Quantity)
-                return Ok("OutOfStock");
+            //var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
+
             if (id == null)
                 return NotFound();
 
             db.Carts.Add(new Cart()
             {
                 UserId =id,
-                ProductId = 3,
-                Quantity = model.Quantity,
+                ProductId = model.ProductId,
             });
 
             await db.SaveChangesAsync();
-            return Ok("Added to cart");
+            return Ok(model);
         }
-        [HttpPut("UpdateCart")]
-        [ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
+        //[HttpPut("UpdateCart")]
+        //[ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> UpdateCart(CartModel model)
-        {
-            var id = HttpContext.User.FindFirstValue("UserId");
-            var Items = await db.Carts.FindAsync(model.Id);
-            if (Items == null)
-                return NotFound();
+        //public async Task<IActionResult> UpdateCart(CartModel model)
+        //{
+        //    var id = HttpContext.User.FindFirstValue("UserId");
+        //    var Items = await db.Carts.FindAsync(model.Id);
+        //    if (Items == null)
+        //        return NotFound();
 
-            Items.UserId = id;
-            Items.ProductId = 3;                
-            Items.Quantity = model.Quantity;
-            await db.SaveChangesAsync();
-            return Ok("Updated the cart");
-        }
+        //    Items.UserId = id;
+        //    Items.ProductId = 3;                
+        //    await db.SaveChangesAsync();
+        //    return Ok("Updated the cart");
+        //}
         [HttpDelete("DeleteCart")]
         [ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
@@ -179,23 +179,34 @@ namespace BootCart.Controller
             return Ok(Cart);
         
         }
-        [HttpPut("UpdateProfile")]
-        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
 
-        public async Task<IActionResult> UpdateProfile(RegisterRequestModel model)
+        [HttpGet("ViewProducts")]
+
+        public async Task<IActionResult> ViewProducts()
         {
-            var user = await db.ApplicationUsers.FindAsync(model.Id);
-            if (user == null)
-                return NotFound();
-            user.FirstName = model.FirstName;
-            user.LastName = model.LastName;
-            user.Email = model.Email;
-            user.Gender = model.Gender;
-            user.PhoneNumber = model.PhoneNumber;
-            user.DateOfBirth = model.DateOfBirth;
-            await db.SaveChangesAsync();
-            return Ok(user);
+
+            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.ItemQuantity > 0).ToListAsync();
+            return Ok(stock);
+
         }
+
+        //[HttpPut("UpdateProfile")]
+        //[ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
+
+        //public async Task<IActionResult> UpdateProfile(RegisterRequestModel model)
+        //{
+        //    var user = await db.ApplicationUsers.FindAsync(model.Id);
+        //    if (user == null)
+        //        return NotFound();
+        //    user.FirstName = model.FirstName;
+        //    user.LastName = model.LastName;
+        //    user.Email = model.Email;
+        //    user.Gender = model.Gender;
+        //    user.PhoneNumber = model.PhoneNumber;
+        //    user.DateOfBirth = model.DateOfBirth;
+        //    await db.SaveChangesAsync();
+        //    return Ok(user);
+        //}
     }   
 }

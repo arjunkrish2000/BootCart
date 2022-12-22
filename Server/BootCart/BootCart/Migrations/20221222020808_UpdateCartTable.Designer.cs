@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootCart.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221221115001_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20221222020808_UpdateCartTable")]
+    partial class UpdateCartTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,9 +33,6 @@ namespace BootCart.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")

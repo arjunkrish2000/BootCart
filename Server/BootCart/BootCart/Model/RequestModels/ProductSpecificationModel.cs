@@ -7,7 +7,7 @@
         public string Material { get; set; }
 
 
-        public int ItemQty { get; set; }
+        public int ItemQuantity { get; set; }
 
         public int Pid { get; set; }
     }

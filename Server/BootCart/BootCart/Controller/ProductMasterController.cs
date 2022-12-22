@@ -43,17 +43,19 @@ namespace BootCart.Controller
 
         public async Task<IActionResult> AddProductSpecification(ProductSpecificationModel model)
         {
+            var id = HttpContext.User.FindFirstValue("UserId");
 
             db.ProductSpecifications.Add(new ProductSpecification()
             {
                Color = model.Color,
                Material = model.Material,
                Size = model.Size,
-               ItemQuantity = model.ItemQty,
+               ItemQuantity = model.ItemQuantity,
+               UserId = id,
                ProductId = model.Pid
             });
             await db.SaveChangesAsync();
-            return Ok("Product specification details succesfully added");
+            return Ok(model);
         }
 
         [HttpGet("ViewStock")]
@@ -61,7 +63,7 @@ namespace BootCart.Controller
         public async Task<IActionResult> Viewstock()
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var stock = db.Products.Where(i => i.ApplicationUserId == id);
+            var stock = await db.ProductSpecifications.Include(i => i.Products).Where(i => i.UserId == id).ToListAsync() ;
             return Ok(stock);
         }
      
@@ -72,7 +74,6 @@ namespace BootCart.Controller
 
         public async Task<IActionResult> UpdateProduct(ProductViewModel model)
         {
-            var id = HttpContext.User.FindFirstValue("UserId");
             var prdct = await db.Products.FindAsync(model.Id);
             if (prdct == null)
                 return NotFound();
@@ -82,9 +83,8 @@ namespace BootCart.Controller
             prdct.ProductImage = model.ProductImage;
             prdct.AddedDate = DateTime.Now;
             prdct.Price = model.Price;
-            prdct.ApplicationUserId = id;
             await db.SaveChangesAsync(); 
-            return Ok("The product details has been succesfully updated");
+            return Ok();
         }
     }
 }

@@ -3,7 +3,7 @@
    
     public class RegisterRequestModel
     {
-        public string Id { get; set; }
+
 
         [Required]
         [StringLength(15)]
