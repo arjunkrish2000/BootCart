@@ -38,7 +38,7 @@ export class UploadComponent {
       reportProgress: true,
     });
 
-    this.uploadUrl = '';
+    this.uploadUrl = 'https://localhost:7089/api/ProductMaster/UploadImage';
     this.uploadProgress = 0;
     this.working = true;
 
