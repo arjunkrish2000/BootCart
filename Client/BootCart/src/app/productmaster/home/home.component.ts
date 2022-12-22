@@ -13,10 +13,10 @@ export class HomeComponent {
   constructor(private pmService:ProductMasterService,){}
 
   ngOnInit() {
-    this.pmService.ViewStock()
-      .subscribe(response => {
-        this.products = response;
+    this.pmService.ViewInStockProducts()
+      .subscribe((response:any) => {
         console.log(response);
+        this.products = response;
       });
 }
 

@@ -10,14 +10,18 @@ import { CustomerService } from '../customer.service';
 export class ViewBagComponent {
   productId:any
   cart:any
+  pid:any
   constructor(private route:ActivatedRoute,private customerService:CustomerService,private router:Router){}
+  
   ngOnInit(){
-    const productId = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(productId);
-
-    this.customerService.AddToCart(productId).subscribe({
+    this.productId = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(this.productId);
+    this.pid = parseInt(this.productId);
+    
+    this.customerService.AddToCart(this.pid).subscribe({
       next:(responce)=>{
         console.log(responce);
+        this.router.navigate(['view-bag'])
       }
   })
 
@@ -25,6 +29,7 @@ export class ViewBagComponent {
       .subscribe(response => {
         this.cart = response;
         console.log(response);
+        this.router.navigate(['view-bag'])
       });
   }
   
