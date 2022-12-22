@@ -86,6 +86,47 @@ namespace BootCart.Controller
             await db.SaveChangesAsync(); 
             return Ok();
         }
+
+
+        public class UploadImageRequest
+        {
+            public IFormFile ImageFile { get; set; }
+            public string Title { get; set; }
+        }
+
+
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage([FromForm] UploadImageRequest uploadImageRequest)
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, "ProductImages");
+            string fileName = Guid.NewGuid().ToString();
+
+
+
+            bool folderExists = Directory.Exists(path);
+            if (!folderExists)
+                Directory.CreateDirectory(path);
+
+
+
+            if (uploadImageRequest.ImageFile.Length > 0)
+            {
+                string filePath = Path.Combine(path, fileName + Path.GetExtension(uploadImageRequest.ImageFile.FileName));
+                using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await uploadImageRequest.ImageFile.CopyToAsync(fileStream);
+                }
+            }
+
+
+
+            //Store fileName , extension , imageTitle into product master table
+
+
+
+            return Ok("Image Uploaded");
+        }
     }
 }
 
