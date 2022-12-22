@@ -29,3 +29,11 @@ select {
   cursor: inherit;
   line-height: inherit;
 }
+
+.type{
+  margin-top: 4px;
+  margin-right: 10px;
+}
+.btn1{
+  margin-left: 130px;
+}

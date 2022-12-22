@@ -1,0 +1,17 @@
+.card{
+    
+  width: 200px;
+
+ 
+}
+.card-body{
+    box-shadow: 1px 1px 10px;
+}
+.card-img-top{
+    box-shadow: 1px 1px 10px;
+
+
+}
+.btn{
+    width: 215px;
+}

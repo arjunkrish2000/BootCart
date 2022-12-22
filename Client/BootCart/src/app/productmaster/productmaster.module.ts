@@ -19,8 +19,7 @@ import { PublicModule } from '../public/public.module';
     ProductmasterLayoutComponent,
     ProductmasterNavbarComponent,
     AddProductComponent,
-    AddProductSpecificationComponent,
-    
+    AddProductSpecificationComponent
   ],
   imports: [
     CommonModule,

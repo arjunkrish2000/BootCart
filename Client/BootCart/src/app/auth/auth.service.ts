@@ -18,4 +18,7 @@ export class AuthService {
   register(data: any){
     return this.http.post(`${StaticDetails.API_URL}/accounts/register`, data);
   }
+  registerProductMaster(data: any){
+    return this.http.post(`${StaticDetails.API_URL}/accounts/registerproductmaster`, data);
+  }
 }
