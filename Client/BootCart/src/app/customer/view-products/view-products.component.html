@@ -11,16 +11,17 @@
 
     <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.webp" alt="Card image cap">
     <div class="card-body ">
-    <h6 class="card-title">{{product.product.productType}}</h6>
+    <h6 class="card-title">{{product.products.productType}}</h6>
       
     <p class="card-title">Colour: {{product.color}}</p>
     <p class="card-title">Material: {{product.material}}</p>
     <p class="card-title">Size: {{product.size}}</p>
+    <p class="card-title">Quantity Remaining: {{product.itemQuantity}}</p>
 
 
 </div>
 <div class="card-footer d-flex">
-    <a  class="btn btn-outline-info  ">Add to Bag</a>
+    <a  class="btn btn-primary" routerLink="/view-bag/{{product.id}}">Add to Bag</a>
 </div>
  
    

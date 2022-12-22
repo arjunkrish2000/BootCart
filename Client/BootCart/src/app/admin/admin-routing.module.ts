@@ -9,6 +9,7 @@ import { ViewProductsComponent } from './view-products/view-products.component';
 
 const routes: Routes = [
   {path: '', component: AdminLayoutComponent, children:[
+    {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'view-customers', component: ViewCustomersComponent},
     {path: 'view-product-masters', component: ViewProductMastersComponent},

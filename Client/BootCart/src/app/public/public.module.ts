@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { PublicLayoutComponent } from './public-layout.component';
 import { FooterComponent } from './footer/footer.component';
+import { CustomerModule } from '../customer/customer.module';
 
 @NgModule({
   declarations: [

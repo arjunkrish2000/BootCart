@@ -11,16 +11,10 @@ import { Routes, RouterModule } from '@angular/router'; // CLI imports router
 })
 export class CustomerNavbarComponent {
 
-  /**
-   *
-   */
-  constructor(private router:Router) {
-    
-  }
+  constructor(private router:Router) {}
 	checkLogout(){
-
           localStorage.removeItem('token')
 					this.router.navigate(["/"]);
 					}
-				}
+}
 			
