@@ -25,6 +25,6 @@ export class CustomerService {
     return this.http.get(`${StaticDetails.API_URL}/customer/viewcart`)
   }
   AddToCart(productId:any){
-    return this.http.post(`${StaticDetails.API_URL}/customer/addtocart`,productId)
+    return this.http.get(`${StaticDetails.API_URL}/customer/addtocart/` + productId);
   }
 }
