@@ -177,7 +177,7 @@ namespace BootCart.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("BootCart.Model.ProductMaster", b =>

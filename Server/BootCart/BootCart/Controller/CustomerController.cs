@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
 using BootCart.Model.RequestModels;
+using BootCart.Model.ResponseModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -208,5 +209,43 @@ namespace BootCart.Controller
         //    await db.SaveChangesAsync();
         //    return Ok(user);
         //}
-    }   
+        //Get User Details
+        [HttpGet("GetUser")]
+        [ProducesResponseType(typeof(RegisterRequestModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetUser()
+        {
+            var userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var logedinuser = await userManager.FindByNameAsync(userName);
+            var user = new RegisterRequestModel()
+            {
+                FirstName = logedinuser.FirstName,
+                LastName = logedinuser.LastName,
+                Email = logedinuser.Email,
+                PhoneNumber= logedinuser.PhoneNumber,
+            
+            };
+            return Ok(new ResponseModel<RegisterRequestModel>()
+            {
+                Data = user,
+            });
+        }
+        //Updating User Details
+        [HttpPut("UpdateProfile")]
+        [ProducesResponseType(typeof(UpdateProfileModel), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileModel model)
+        {
+            var userName = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await userManager.FindByNameAsync(userName);
+
+            if (user == null)
+                return NotFound();
+            user.FirstName = model.firstName;
+            user.LastName = model.lastName;
+            user.PhoneNumber = model.phoneNumber;
+            user.Email = model.email;
+            await db.SaveChangesAsync();
+            return Ok(user);
+        }
+   
+    }
 }

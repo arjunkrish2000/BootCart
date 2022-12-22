@@ -19,11 +19,9 @@ namespace BootCart.Controller
         }
         [HttpGet("ProductMasterView")]
         [ProducesResponseType(typeof(IEnumerable<ApplicationUser>), StatusCodes.Status200OK)]
-        public async Task<ActionResult> ProductView()
+        public async Task<ActionResult> ProductMasterView()
         {
-            var users = await userManager.GetUsersInRoleAsync("ProductMaster");
-            if(users == null)
-                return NotFound();
+            var users = await userManager.GetUsersInRoleAsync("ProductMaster");      
             return Ok(users);
         }
         [HttpGet("CustomerView")]
@@ -36,7 +34,6 @@ namespace BootCart.Controller
             return Ok(users);
         }
         [HttpGet("OrderView")]
-
         public async Task<IActionResult> OrderView()
         {
             
