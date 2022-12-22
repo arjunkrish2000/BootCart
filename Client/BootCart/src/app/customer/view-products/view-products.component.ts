@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { response } from 'express';
 import { CustomerService } from '../customer.service';
 
@@ -18,4 +19,5 @@ export class ViewProductsComponent {
         console.log(response);
       });
 }
+
 }

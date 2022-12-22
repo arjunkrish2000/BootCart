@@ -13,6 +13,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { PublicModule } from '../public/public.module';
 import { ProfileComponent } from './profile/profile.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ProfileComponent } from './profile/profile.component';
     CommonModule,
     CustomerRoutingModule,
     RouterModule,
-    PublicModule
+    PublicModule,
+    FormsModule
   ]
 })
 export class CustomerModule { }
