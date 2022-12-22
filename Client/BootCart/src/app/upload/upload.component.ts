@@ -31,9 +31,9 @@ export class UploadComponent {
     }
 
     const formData = new FormData();
-    formData.append(this.uploadFile.name, this.uploadFile);
+    formData.append("ImangFile", this.uploadFile);
 
-    const url = '';
+    const url = "https://localhost:7089/api/ProductMaster/UploadImage";
     const uploadReq = new HttpRequest('POST', url, formData, {
       reportProgress: true,
     });
