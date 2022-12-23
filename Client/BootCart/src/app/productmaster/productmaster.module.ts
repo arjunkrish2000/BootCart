@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service/public-api';
 import { AddProductSpecificationComponent } from './add-product-specification/add-product-specification.component';
 import { PublicModule } from '../public/public.module';
+import { UploadComponent } from '../upload/upload.component';
 
 
 @NgModule({

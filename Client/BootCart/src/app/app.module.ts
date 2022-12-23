@@ -14,10 +14,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { ErrorInterceptor } from './helpers/interceptors/errorInterceptor';
 import { JwtInterceptor } from './helpers/interceptors/jwtInterceptor';
 import { AuthGuard } from './helpers/authGuard';
+import { UploadComponent } from './upload/upload.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
