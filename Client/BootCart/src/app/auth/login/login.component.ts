@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import jwt_decode from "jwt-decode";
-import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent {
 	message: string = '';
-	constructor(private loginService:AuthService, private router:Router,private cookieService: CookieService) { }
+	constructor(private loginService:AuthService, private router:Router) { }
 
 	checkLogin(form: NgForm){
 		this.loginService.login(form.value).subscribe({
@@ -22,8 +22,7 @@ export class LoginComponent {
 					var decodedToken:any = jwt_decode(res.data);
 					console.log(decodedToken.UserId);
 					console.log(decodedToken);
-					this.cookieService.set('userid', decodedToken.UserId);
-					console.log(this.cookieService.get('userid'));
+					
 					switch(decodedToken.Role){
 						case "Admin":
 							this.router.navigate(["/admin"]);

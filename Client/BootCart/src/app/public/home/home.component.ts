@@ -11,6 +11,7 @@ export class HomeComponent {
   products:any
 	constructor(private publicService:PublicService) { }
 
+  
 	ngOnInit() {
     this.publicService.ViewProducts()
       .subscribe(response => {

@@ -12,6 +12,7 @@ import { CookieService } from 'ngx-cookie-service/public-api';
 import { AddProductSpecificationComponent } from './add-product-specification/add-product-specification.component';
 import { PublicModule } from '../public/public.module';
 import { UploadComponent } from '../upload/upload.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { UploadComponent } from '../upload/upload.component';
     ProductmasterLayoutComponent,
     ProductmasterNavbarComponent,
     AddProductComponent,
-    AddProductSpecificationComponent
+    AddProductSpecificationComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

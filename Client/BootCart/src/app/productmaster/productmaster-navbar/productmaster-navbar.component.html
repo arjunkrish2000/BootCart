@@ -1,31 +1,36 @@
 <header style="z-index:500">
   
-    <a class="text-info" routerLink="/" routerLinkActive="active"> 
+    <a class="text-info" routerLink="/productmaster" routerLinkActive="active"> 
      <h3 class="logo"><span class="text-white">Boot</span>Cart</h3></a>
-          <div class="dropdown">
-            <button class="dropbtn"><h6>MEN</h6></button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-          </div>
-          <div class="dropdown">
-            <button class="dropbtn"><h6>WOMEN</h6></button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-          </div>
-          <div class="dropdown">
-            <button class="dropbtn"><h6>KIDS</h6></button>
-            <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
-              <a href="#">Link 3</a>
-            </div>
-          </div>
+     <div class="dropdown">
+      <button class="dropbtn"><h6>MEN</h6></button>
+      <div class="dropdown-content">
+        <h5 style="color: black;">Formal</h5>
+        <a href="#">Earth</a>
+        <a href="#">Oxford </a>
+        <a href="#">Derby</a>
+        <h5 style="color: black;">Casual</h5>
+        <a href="#">Sneakers</a>
+        <a href="#">Derby </a>
+        <a href="#">Leather Lace Up</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn"><h6>WOMEN</h6></button>
+      <div class="dropdown-content">
+        <a href="#">Sneakers</a>
+        <a href="#">Leather</a>
+        <a href="#">Normal</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn"><h6>KIDS</h6></button>
+      <div class="dropdown-content">
+        <a href="#">Pre-Walking Shoe</a>
+        <a href="#">Toddler Shoe</a>
+        <a href="#">School Shoes</a>
+      </div>
+    </div>
           <nav class="mr-5 ms-auto   navbar-fixed-top " >
     
         <div class="d-flex">
@@ -49,20 +54,15 @@
                 </svg></div>
               <div class="dropdown-content">
                 <h6 class=" p1 text-black">  Welcome</h6>
-                <p  class=" p1 text-black">   To access account and manage orders.</p>
-                <a  class="btn btn-outline-info" routerLinkActive="active" (click)="checkLogout()"> Logout</a>
-  
-  
+                <a  class="btn btn-outline-info" routerLinkActive="active" (click)="checkLogout()" style="font-size: smaller;"> Logout</a>
                 <hr class="bg-light border-2 border-top ">
-  
-  
-               <p  class=" p1 text-black">   Orders</p>
-               <p  class=" p1 text-black">   WishList</p>
-               <a  routerLink="/auth/product-master-registration" routerLinkActive="active">
-               <p  class=" p1 text-black"> Add Your products </p></a>
-               <p  class=" p1 text-black">   Coupens</p>
+                <a  class="p1 text-black" routerLinkActive="active" routerLink="/productmaster/profile">Update Profile</a>
+               <a  class=" p1 text-black" routerLinkActive="active" routerLink="/customer/profile">   Orders</a>
+               <a  class=" p1 text-black" routerLinkActive="active" routerLink="/customer/profile">   WishList</a>
+               <a  class=" p1 text-black" routerLinkActive="active" routerLink="/customer/profile"> Add Your products </a>
+               <a  class=" p1 text-black">   Coupens</a>
                <hr class="bg-light border-2 border-top ">
-  
+
                <p  class=" p1 text-black">   About</p>
   
                <p  class=" p1 text-black">   Contact Us</p>

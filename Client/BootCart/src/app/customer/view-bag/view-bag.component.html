@@ -20,12 +20,17 @@
     
     </div>
     <div class="card-footer d-flex">
-        <a  class="btn btn-primary" (click)="removeFromBag(product.products.id)">Remove</a>
+        <a  class="btn btn-primary" (click)="removeFromBag(product.id)">Remove</a>
     </div>
-     
+ 
        
       </div>
+      <div class="card-footer d-flex">
+        <a  class="btn btn-primary" (click)="placeOrder()">Buy Now</a>
     </div>
+     
+    </div>
+   
 </div>
 <ng-template #elseBlock>
 

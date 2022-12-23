@@ -9,15 +9,28 @@ import { ProductMasterService } from '../product-master.service';
 })
 export class HomeComponent {
 
-  products:any
+  products:any;
   constructor(private pmService:ProductMasterService,){}
 
   ngOnInit() {
-    this.pmService.ViewInStockProducts()
+    this.products = []
+    this.getProducts();
+}
+
+getProducts(){
+  this.pmService.ViewInStockProducts()
       .subscribe((response:any) => {
         console.log(response);
         this.products = response;
       });
 }
+
+deleteProduct(pid:any){
+  this.pmService.productDelete(pid)
+  .subscribe(responce => {
+    this.getProducts();
+  })
+}
+
 
 }

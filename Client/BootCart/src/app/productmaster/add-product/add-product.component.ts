@@ -29,7 +29,7 @@ export class AddProductComponent {
     this.pmService.AddProduct(form.value).subscribe({
         next:(responce)=>{
           console.log(responce);
-          this.router.navigate(['/add-product'])
+          location.reload();
         }
     })
   }

@@ -11,6 +11,7 @@ import { AuthModule } from '../auth/auth.module';
 import { PublicModule } from '../public/public.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'add-product', component: AddProductComponent},
     {path: 'add-product-specification/:id', component: AddProductSpecificationComponent} ,
+    {path: 'profile', component: ProfileComponent} ,
 
   ]}
 ];

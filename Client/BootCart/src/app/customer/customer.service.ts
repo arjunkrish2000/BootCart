@@ -27,4 +27,10 @@ export class CustomerService {
   AddToCart(productId:any){
     return this.http.get(`${StaticDetails.API_URL}/customer/addtocart/` + productId);
   }
+  DeleteFromBag(cid:any){
+    return this.http.delete(`${StaticDetails.API_URL}/customer/deletecart/`+ cid)
+  }
+  AddOrderItem(pid:any){
+    return this.http.get(`${StaticDetails.API_URL}/customer/addorderitem/`+ pid)
+  }
 }

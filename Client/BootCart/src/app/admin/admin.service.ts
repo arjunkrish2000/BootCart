@@ -6,9 +6,7 @@ import { StaticDetails } from '../helpers/staticDetails';
   providedIn: 'root'
 })
 export class AdminService {
-
   constructor(private http: HttpClient) { }
-
 
   GetCustomers(){
     return this.http.get(`${StaticDetails.API_URL}/admin/customerview`);
@@ -16,5 +14,7 @@ export class AdminService {
   GetProductMasters(){
     return this.http.get(`${StaticDetails.API_URL}/admin/productmasterview`);
   }
-
+  GetProducts(){
+    return this.http.get(`${StaticDetails.API_URL}/admin/ProductView`);
+  }
 }
