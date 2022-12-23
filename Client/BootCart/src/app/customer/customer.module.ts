@@ -14,6 +14,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { PublicModule } from '../public/public.module';
 import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     OrderHistoryComponent,
     InvoiceComponent,
     ProfileComponent,
+    FeedbackComponent,
   ],
   imports: [
     CommonModule,
