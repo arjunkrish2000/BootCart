@@ -31,7 +31,7 @@ import { UploadComponent } from './upload/upload.component';
     AuthModule,
     HttpClientModule,
     CustomerModule,
-     AdminModule,
+    AdminModule,
     ProductmasterModule,
     RouterModule.forRoot([
       {

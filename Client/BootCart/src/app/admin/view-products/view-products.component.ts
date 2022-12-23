@@ -7,6 +7,7 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./view-products.component.css']
 })
 export class ViewProductsComponent {
+ 
 
    product:any
     constructor(private viewService:AdminService) { }

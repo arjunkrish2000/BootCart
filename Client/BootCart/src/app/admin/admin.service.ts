@@ -14,6 +14,7 @@ export class AdminService {
   GetProductMasters(){
     return this.http.get(`${StaticDetails.API_URL}/admin/productmasterview`);
   }
+ 
   GetProducts(){
     return this.http.get(`${StaticDetails.API_URL}/admin/ProductView`);
   }
