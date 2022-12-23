@@ -9,16 +9,18 @@ namespace BootCart.Data
         {
 
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
+      
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
-               
-            builder.Entity<Cart>()
-               .HasOne(m => m.Product)
-               .WithMany(m => m.Addtocart)
-               .OnDelete(DeleteBehavior.NoAction);
-           
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<OrderItem>()
+                .HasKey(nameof(OrderItem.Id), nameof(OrderItem.ProductSpecificationId));
+
+            modelBuilder.Entity<Order>()
+                .HasOne(x => x.OrderItem)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(p => new { p.OrderItemId, p.ProductId });
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }

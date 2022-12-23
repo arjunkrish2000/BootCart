@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BootCart.Controller
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -35,10 +36,15 @@ namespace BootCart.Controller
         }
         [HttpGet("OrderView")]
         public async Task<IActionResult> OrderView()
-        {
-            
+        {    
             var order = await db.Orders.ToListAsync();
             return Ok(order);
+        }
+        [HttpGet("ProductView")]
+        public async Task<IActionResult> ProductView()
+        {
+            var products = await db.Products.ToListAsync();
+            return Ok(products);
         }
     }
 }

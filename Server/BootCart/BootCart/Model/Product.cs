@@ -19,9 +19,6 @@ namespace BootCart.Model
         [ForeignKey(nameof(ApplicationUser))]
         public string ApplicationUserId { get; set; }
 
-        public IEnumerable<Order> ProductOrder { get; set; }
-
-        public IEnumerable<Cart> Addtocart { get; set; }
 
     }
 }

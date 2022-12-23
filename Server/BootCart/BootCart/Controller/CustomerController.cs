@@ -27,10 +27,10 @@ namespace BootCart.Controller
         }
 
 
-        [HttpPost("AddOrderItem")]
+        [HttpGet("AddOrderItem/{pid}")]
         [ProducesResponseType(typeof(OrderItem), StatusCodes.Status200OK)]
 
-        public async Task<IActionResult> AddOrderItem(OrderItemModel model)
+        public async Task<IActionResult> AddOrderItem(int pid)
         {
             var id = HttpContext.User.FindFirstValue("UserId");
             if (id == null)
@@ -43,12 +43,12 @@ namespace BootCart.Controller
             db.OrderItems.Add(new OrderItem()
             {
                 UserId= id,
-               // ProductId=1,
-                Quantity=model.Quantity,
-                IndividulaItemPrice=model.IndividulaItemPrice
+                ProductSpecificationId = pid,
+                Quantity=1,
+                IndividulaItemPrice=500
             });
-            var Item = await db.Carts.FindAsync(model.ProductId);
-            db.Carts.Remove(Item);
+            //var item = await db.Carts.FindAsync(pid);
+            //db.Carts.Remove(item);
             await db.SaveChangesAsync();
             return Ok();
         }
@@ -58,13 +58,13 @@ namespace BootCart.Controller
         public async Task<IActionResult> UpdateOrderItem(OrderItemModel model)
         {
             var id = HttpContext.User.FindFirstValue("UserId");
-            var Items = await db.OrderItems.FindAsync(model.Id);
-            if (Items == null)
-                return NotFound();
-            Items.UserId = id;
+           // var Items = await db.OrderItems.FindAsync(model.Id);
+            //if (Items == null)
+            //    return NotFound();
+            //Items.UserId = id;
            // Items.ProductId = 1;
-            Items.Quantity = model.Quantity;
-            Items.IndividulaItemPrice = model.IndividulaItemPrice;
+            //Items.Quantity = model.Quantity;
+            //Items.IndividulaItemPrice = model.IndividulaItemPrice;
             await db.SaveChangesAsync();
             return Ok();
         }
@@ -98,10 +98,8 @@ namespace BootCart.Controller
         {
             var userId = HttpContext.User.FindFirstValue("UserId");
 
-            //var product = await db.ProductSpecifications.FindAsync(model.ProductId); ;
-
-            //if (id == null)
-            //    return NotFound();
+            if (id == null)
+                return NotFound();
 
             db.Carts.Add(new Cart()
             {
@@ -127,19 +125,19 @@ namespace BootCart.Controller
         //    await db.SaveChangesAsync();
         //    return Ok("Updated the cart");
         //}
-        [HttpDelete("DeleteCart")]
+        [HttpDelete("DeleteCart/{cid}")]
         [ProducesResponseType(typeof(Cart), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCart(int Id)
+        public async Task<IActionResult> DeleteCart(int cid)
         {
-            var Cart = await db.Carts.FindAsync(Id);
-            if (Cart == null)
+            var cart = await db.Carts.FindAsync(cid);
+            if (cart == null)
             {
                 return NotFound();
             }
-            db.Carts.Remove(Cart);
+            db.Carts.Remove(cart);
             await db.SaveChangesAsync();
-            return Ok("The corresponding cart is deleted");
+            return Ok(1);
         }
         [HttpGet("ViewCart")]
 
@@ -162,7 +160,7 @@ namespace BootCart.Controller
             {
                CustomerId = id,
                OrderedDate = DateTime.Now,
-               DeliveryDate=model.DeliveryDate,
+               DeliveryDate = DateTime.Now.AddDays(7),
                Address = model.Address,
                TotalAmount = model.TotalAmount,
                Status="Pending",
@@ -171,6 +169,7 @@ namespace BootCart.Controller
             await db.SaveChangesAsync();
             return Ok("PlacedOrder");
         }
+
         [HttpGet("ViewOrder")]
 
         public async Task<IActionResult> ViewOrder()
@@ -191,25 +190,6 @@ namespace BootCart.Controller
 
         }
 
-        //[HttpPut("UpdateProfile")]
-        //[ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
-        //[ProducesResponseType(typeof(Nullable), StatusCodes.Status400BadRequest)]
-
-        //public async Task<IActionResult> UpdateProfile(RegisterRequestModel model)
-        //{
-        //    var user = await db.ApplicationUsers.FindAsync(model.Id);
-        //    if (user == null)
-        //        return NotFound();
-        //    user.FirstName = model.FirstName;
-        //    user.LastName = model.LastName;
-        //    user.Email = model.Email;
-        //    user.Gender = model.Gender;
-        //    user.PhoneNumber = model.PhoneNumber;
-        //    user.DateOfBirth = model.DateOfBirth;
-        //    await db.SaveChangesAsync();
-        //    return Ok(user);
-        //}
-        //Get User Details
         [HttpGet("GetUser")]
         [ProducesResponseType(typeof(RegisterRequestModel), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetUser()

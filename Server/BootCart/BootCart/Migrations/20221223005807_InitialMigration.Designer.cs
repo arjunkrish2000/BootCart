@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BootCart.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221222171603_InitialMigration1")]
-    partial class InitialMigration1
+    [Migration("20221223005807_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,11 +68,14 @@ namespace BootCart.Migrations
                     b.Property<DateTime>("DeliveryDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("OrderItemId")
-                        .HasColumnType("bigint");
+                    b.Property<int>("OrderItemId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -85,23 +88,20 @@ namespace BootCart.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("OrderItemId");
+                    b.HasIndex("OrderItemId", "ProductId");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("BootCart.Model.OrderItem", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
-
-                    b.Property<int>("IndividulaItemPrice")
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductSpecificationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IndividulaItemPrice")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -111,9 +111,7 @@ namespace BootCart.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductSpecificationId");
+                    b.HasKey("Id", "ProductSpecificationId");
 
                     b.HasIndex("UserId");
 
@@ -235,9 +233,6 @@ namespace BootCart.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("OrderItemId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
@@ -250,8 +245,6 @@ namespace BootCart.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderItemId");
 
                     b.HasIndex("ProductId");
 
@@ -515,32 +508,24 @@ namespace BootCart.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BootCart.Model.OrderItem", "OrderItems")
-                        .WithMany()
-                        .HasForeignKey("OrderItemId")
+                    b.HasOne("BootCart.Model.OrderItem", "OrderItem")
+                        .WithMany("Orders")
+                        .HasForeignKey("OrderItemId", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("OrderItems");
+                    b.Navigation("OrderItem");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("BootCart.Model.OrderItem", b =>
                 {
-                    b.HasOne("BootCart.Model.ProductSpecification", "ProductSpecification")
-                        .WithMany()
-                        .HasForeignKey("ProductSpecificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BootCart.Model.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ProductSpecification");
 
                     b.Navigation("User");
                 });
@@ -580,10 +565,6 @@ namespace BootCart.Migrations
 
             modelBuilder.Entity("BootCart.Model.ProductSpecification", b =>
                 {
-                    b.HasOne("BootCart.Model.OrderItem", null)
-                        .WithMany("Specifications")
-                        .HasForeignKey("OrderItemId");
-
                     b.HasOne("BootCart.Model.Product", "Products")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -654,7 +635,7 @@ namespace BootCart.Migrations
 
             modelBuilder.Entity("BootCart.Model.OrderItem", b =>
                 {
-                    b.Navigation("Specifications");
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
