@@ -27,7 +27,7 @@ import { AuthGuard } from './helpers/authGuard';
     AuthModule,
     HttpClientModule,
     CustomerModule,
-     AdminModule,
+    AdminModule,
     ProductmasterModule,
     RouterModule.forRoot([
       {

@@ -1,1 +1,24 @@
-<p>view-products works!</p>
+<div>
+    <table class="table" id="customers">
+        <tr>
+            <th>Id</th>
+            <th>Product Type</th>
+            <th>Product Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Added Date</th>
+            <th>ApplicationUser Id</th>
+        </tr>
+        <tr *ngFor="let products of product">
+            <td>{{product.id}}</td>
+            <td>{{product.productType}}</td>
+            <td>{{product.productCategory}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.addedDate}}</td>
+            <td>{{product.applicationUserId}}</td>
+        </tr>
+    </table>
+</div>
+
+
